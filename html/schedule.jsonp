@@ -1,22 +1,5 @@
 schedule = {
-	"majors":[
-		{"title":"Computer Science, BS",
-			"predec":[0,2,4,5,6],
-			"core":[7,8,9,10,11,12,13,14],
-			"advanced":[15,16,17,18]
-	}],
-	"minors":[
-		{"title":"Mathematics",
-			"predec":[4,5,6,14],
-			"core":[19],
-			"advanced":[20,21]
-	}],
-	"clusters":[
-		{"title":"Ethics and Values",
-			"courses":[22,23,24]
-		}, {"title":"Psychology as a Social Science",
-			"courses":[25,26,27]
-	}],
+
 	"years":[
 		{"title":"Freshman (2010 - 2011)",
 			"semesters":[{
