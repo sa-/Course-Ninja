@@ -1,0 +1,76 @@
+h1 {
+	text-align:center;
+}
+        
+#center {
+	margin-left:200px;
+	margin-right:200px;
+	margin-top:125px;
+	clear:both;
+	text-align:center;
+	border-radius: 15px;
+	padding:25px 50px;
+	background: rgba(255, 255, 255, 0.5);
+}
+
+.header {
+	float:left;
+	margin-top:50px;
+	margin-left:10px;
+	font-family: roboto, serif;
+}
+
+.border {
+	border-right-style:solid;
+	border-bottom-style:solid;
+	padding-bottom:25px;
+	padding-right:25px;
+	float:left;
+	margin-top:50px;
+	font-family: roboto, serif;
+}
+
+body {
+	font-family: roboto, serif;
+	background-image: url("res/Rush.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-attachment: fixed;
+	background-position: center;
+}
+
+input {
+	width: 4em;
+	margin-right: -10px;
+	margin-left: -5px;
+}
+
+label {
+	margin-right: 10px;
+}
+
+select {
+	margin-left: 15px;
+}
+
+#courses {
+	text-align: left;
+	margin-left: 100px;
+}
+
+#continue {
+	font-size: 12pt;
+	padding: 5px;
+	float: right;
+	margin-right: 30px;
+	margin-bottom: 30px;
+}
+
+h3 {
+	margin-bottom: 0px;
+}
+
+p {
+	margin-top: 0px;
+	margin-bottom: 30px;
+}

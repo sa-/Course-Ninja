@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>UR Planner</title>
+		<link rel="stylesheet" href="style.css" type = "text/css">
+		<script src="schedule.jsonp"></script>
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="schedule.js" type="text/javascript"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	</head>
+
+	<body>
+		<div id="left">
+		</div>
+		
+		
+		<div id="center">
+			<h1>UR Planner</h1>
+			
+			<div id="years">
+			</div>
+		</div>
+		
+		<div id="right">
+			<h2>Prerequisites</h2>
+			
+			<ul id="directions" class="non-bullet">
+				<li>Click on a course to see its prerequisites</li>
+			</ul>
+			
+			<ul id="prereq" class="non-bullet">
+				<li id="course"></li>
+				<li id="concur"></li>
+				<li id="pres"></li>
+				<li id="posts"></li>
+			</ul>
+		</div>
+
+		<button id="save">Save</button>
+		<button id="print">Print</button>
+		<button id="send">Send to Advisor</button>
+	</body>
+</html>

@@ -1,0 +1,284 @@
+schedule = {
+	"majors":[
+		{"title":"Computer Science, BS",
+			"predec":[0,2,4,5,6],
+			"core":[7,8,9,10,11,12,13,14],
+			"advanced":[15,16,17,18]
+	}],
+	"minors":[
+		{"title":"Mathematics",
+			"predec":[4,5,6,14],
+			"core":[19],
+			"advanced":[20,21]
+	}],
+	"clusters":[
+		{"title":"Ethics and Values",
+			"courses":[22,23,24]
+		}, {"title":"Psychology as a Social Science",
+			"courses":[25,26,27]
+	}],
+	"years":[
+		{"title":"Freshman (2010 - 2011)",
+			"semesters":[{
+				"title":"Fall 2010",
+				"courses":[0,1,4,5,25]
+			},{"title":"Spring 2011",
+				"courses":[2,3,6,22,28]
+			}]
+		},{"title":"Sophomore (2011 - 2012)",
+			"semesters":[{
+				"title":"Fall 2011",
+				"courses":[7,16,14,23]
+			},{"title":"Spring 2012",
+				"courses":[9,13,19,24]
+			}]
+		},{"title":"Junior (2012 - 2013)",
+			"semesters":[{
+				"title":"Fall 2012",
+				"courses":[10,12,27]
+			},{"title":"Spring 2013",
+				"courses":[8,11,21,26]
+			}]
+		},{"title":"Senior (2013 - 2014)",
+			"semesters":[{
+				"title":"Fall 2013",
+				"courses":[18]
+			},{"title":"Spring 2014",
+				"courses":[15,17,20]
+			}]
+	}],
+	"courses":[
+/*0*/	{"name":"CSC 171",
+			"title":"The Science of Programming",
+			"id":"csc171",
+			"clas":"CSC171",
+			"credits":4,
+			"concurrent":1,
+			"pre":[],
+			"post":[2,13,15,16]
+/*1*/	},{"name":"CSC 171",
+			"title":"The Science of Programming Lab",
+			"id":"csc171l",
+			"clas":"CSC171L",
+			"credits":0,
+			"concurrent":0,
+			"pre":[],
+			"post":[]
+/*2*/	},{"name":"CSC 172",
+			"title":"The Science of Data Structures",
+			"id":"csc172",
+			"clas":"CSC172",
+			"credits":4,
+			"concurrent":3,
+			"pre":[0,4],
+			"post":[7,8,9,12,13]
+/*3*/	},{"name":"CSC 172",
+			"title":"The Science of Data Structures Lab",
+			"id":"csc172l",
+			"clas":"CSC172L",
+			"credits":0,
+			"concurrent":2,
+			"pre":[],
+			"post":[]
+/*4*/	},{"name":"MTH 150",
+			"title":"Discrete Mathematics",
+			"id":"mth150",
+			"clas":"MTH150",
+			"credits":4,
+			"concurrent":null,
+			"pre":[],
+			"post":[2,8,9,13]
+/*5*/	},{"name":"MTH 161",
+			"title":"Calculus IA",
+			"id":"mth161",
+			"clas":"MTH161",
+			"credits":4,
+			"concurrent":null,
+			"pre":[],
+			"post":[6,13]
+/*6*/	},{"name":"MTH 162",
+			"title":"Calculus IIA",
+			"id":"mth162",
+			"clas":"MTH162",
+			"credits":4,
+			"concurrent":null,
+			"pre":[5],
+			"post":[12,13,14]
+/*7*/	},{"name":"CSC 173",
+			"title":"Computation & Formal Systems",
+			"id":"csc173",
+			"clas":"CSC173",
+			"credits":4,
+			"concurrent":null,
+			"pre":[2],
+			"post":[10,11]
+/*8*/	},{"name":"CSC 242",
+			"title":"Introduction to A.I.",
+			"id":"csc242",
+			"clas":"CSC242",
+			"credits":4,
+			"concurrent":null,
+			"pre":[2,4],
+			"post":[]
+/*9*/	},{"name":"CSC 252",
+			"title":"Computer Organization",
+			"id":"csc252",
+			"clas":"CSC252",
+			"credits":4,
+			"concurrent":null,
+			"pre":[2,4],
+			"post":[10,17,18]
+/*10*/	},{"name":"CSC 254",
+			"title":"Programming Language Design & Implementation",
+			"id":"csc254",
+			"clas":"CSC254",
+			"credits":4,
+			"concurrent":null,
+			"pre":[7,9],
+			"post":[17]
+/*11*/	},{"name":"CSC 280",
+			"title":"Computer Models & Limitations",
+			"id":"csc280",
+			"clas":"CSC280",
+			"credits":4,
+			"concurrent":null,
+			"pre":[4,7],
+			"post":[]
+/*12*/	},{"name":"CSC 282",
+			"title":"Design & Analysis of Efficient Algorithms",
+			"id":"csc282",
+			"clas":"CSC282",
+			"credits":4,
+			"concurrent":null,
+			"pre":[3,6],
+			"post":[]
+/*13*/	},{"name":"CSC 200",
+			"title":"Undergraduate Problem Seminar",
+			"id":"csc200",
+			"clas":"CSC200",
+			"credits":4,
+			"concurrent":null,
+			"pre":[0,2,4,5,6],
+			"post":[]
+/*14*/	},{"name":"MTH 165",
+			"title":"Linear Algebra with Differential Equations",
+			"id":"mth165",
+			"clas":"MTH165",
+			"credits":4,
+			"concurrent":null,
+			"pre":[6],
+			"post":[19]
+/*15*/	},{"name":"CSC 210",
+			"title":"Web Programming",
+			"id":"csc210",
+			"clas":"CSC210",
+			"credits":4,
+			"concurrent":null,
+			"pre":[0],
+			"post":[]
+/*16*/	},{"name":"CSC 212",
+			"title":"Human-Computer Interaction",
+			"id":"csc212",
+			"clas":"CSC212",
+			"credits":4,
+			"concurrent":null,
+			"pre":[0],
+			"post":[]
+/*17*/	},{"name":"CSC 255",
+			"title":"Software Analysis and Improvement",
+			"id":"csc255",
+			"clas":"CSC255",
+			"credits":4,
+			"concurrent":null,
+			"pre":[9,10],
+			"post":[]
+/*18*/	},{"name":"CSC 256",
+			"title":"Operating Systems",
+			"id":"csc256",
+			"clas":"CSC256",
+			"credits":4,
+			"concurrent":null,
+			"pre":[9],
+			"post":[]
+/*19*/	},{"name":"MTH 235",
+			"title":"Linear Algebra",
+			"id":"mth235",
+			"clas":"MTH235",
+			"credits":4,
+			"concurrent":null,
+			"pre":[14],
+			"post":[21]
+/*20*/	},{"name":"MTH 233",
+			"title":"Introduction to Cryptography",
+			"id":"mth233",
+			"clas":"MTH233",
+			"credits":4,
+			"concurrent":null,
+			"pre":[],
+			"post":[]
+/*21*/	},{"name":"MTH 240",
+			"title":"Introduction to Topology",
+			"id":"mth240",
+			"clas":"MTH240",
+			"credits":4,
+			"concurrent":null,
+			"pre":[19],
+			"post":[]
+/*22*/	},{"name":"PHL 102",
+			"title":"Ethics",
+			"id":"phl102",
+			"clas":"PHL102",
+			"credits":4,
+			"concurrent":null,
+			"pre":[],
+			"post":[24]
+/*23*/	},{"name":"PHL 103",
+			"title":"Contemporary Moral Problems",
+			"id":"phl103",
+			"clas":"PHL103",
+			"credits":4,
+			"concurrent":null,
+			"pre":[],
+			"post":[24]
+/*24*/	},{"name":"PHL 227",
+			"title":"The Meaning of Life",
+			"id":"phl227",
+			"clas":"PHL227",
+			"credits":4,
+			"concurrent":null,
+			"pre":[22],
+			"post":[]
+/*25*/	},{"name":"PSY 101",
+			"title":"Introduction to Psychology",
+			"id":"psy101",
+			"clas":"PSY101",
+			"credits":4,
+			"concurrent":null,
+			"pre":[],
+			"post":[]
+/*26*/	},{"name":"PSY 161",
+			"title":"Social Psychology and Individual Differences",
+			"id":"psy161",
+			"clas":"PSY161",
+			"credits":4,
+			"concurrent":null,
+			"pre":[],
+			"post":[]
+/*27*/	},{"name":"PSY 171",
+			"title":"Social and Emotional Development",
+			"id":"psy171",
+			"clas":"PSY171",
+			"credits":4,
+			"concurrent":null,
+			"pre":[],
+			"post":[]	
+/*28*/	},{"name":"WRT 105",
+			"title":"Introduction to College Writing",
+			"id":"wrt105",
+			"clas":"WRT105",
+			"credits":4,
+			"concurrent":null,
+			"pre":[],
+			"post":[]
+	}]
+}

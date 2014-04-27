@@ -1,0 +1,55 @@
+
+{
+	"Computer Science B.S.":{
+		"title":"Computer Science B.S.",
+		"satisfiers":[
+			["all", "CSC_prereqs","CSC_BS_core", "CSC_BS_advanced"]
+		]
+	},
+
+	"CSC_prereqs":{
+		"title":"Major Prerequisites",
+		"satisfiers":[
+			["all", "csc171","csc172","mth150","calc"]
+		]
+		
+	},
+
+	"CSC_BS_core":{
+		"title":"Core Requirements",
+		"satisfiers":[
+			["all", "csc173","csc200","csc242","csc252","csc254","csc280","csc282","mth165"]
+		]
+		
+	},
+
+	"calc":{
+		"title":"Introduction to Calculus",
+		"satisfiers":[
+			["all", "mth161","mth162"],
+			["all", "mth171","mth172"],
+			["all", "mth141","mth142","mth143"]
+		]
+	},
+
+	"CSC_BS_advanced":{
+		"title":"Advanced courses",
+		"satisfiers":[
+			["3", "csc255","csc256","csc257","csc258","csc244","csc247","csc248","csc246","csc249","csc281","csc284","csc286","csc287","csc210","csc212"]
+		]
+		
+	},
+
+	"Computer Science B.A.":{
+		"satisfiers":[
+			["all", "CSC_prereqs","CSC_BA_tracks" ]
+		]
+	},
+
+	"CSC_BA_tracks":{
+		"name":"Tracks",
+		"satisfiers":[
+			["1","CSC_BA_AI","CSC_BA_NL","CSC_BA_HCI","CSC_BA_TOC","CSC_BA_Systems","CSC_BA_Security","CSC_BA_Computational_Science"]
+		]
+	}
+}
