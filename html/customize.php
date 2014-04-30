@@ -200,22 +200,26 @@
      $(function() {
         $( ".tabs" ).tabs();
     });
-</script>
+    </script>
 </head>
 
 <body>
+
+
+
+
     <h1>Select your courses</h1>
     
     <?php 
 
-        foreach($majors as $major){
-            makeTable($major);
-        }
+        // foreach($majors as $major){
+        //     makeTable($major);
+        // }
 
 
-        foreach($minors as $minor){
-            makeTable($minor." minor");
-        }
+        // foreach($minors as $minor){
+        //     makeTable($minor." minor");
+        // }
 
     ?>
     <h2>Major: Computer Science BS</h2>
@@ -233,23 +237,24 @@
               <li>CSC 171: The Science of Programming</li>
               <li>CSC 172: The Science of Data Structures</li>
             </ul>
+            <script>courses.push("mth150,csc171,csc172");</script>
 
             <h3>Please select one of the following options:</h3>
-            <input type="radio" name="track1" value="req1" checked="true">
+            <input type="radio" name="mth161,mth162" value="req1" checked="true">
             MTH 161: Calculus IA
             <br />
             <span>MTH 162: Calculus IIA</span>
             </input>
             <br />
             <br />
-            <input type="radio" name="track1" value="req2">
+            <input type="radio" name="mth171,mth172" value="req2">
             MTH 171: Honors Calculus I
             <br />
             <span>MTH 172: Honors Calculus II</span>
             </input>
             <br />
             <br />
-            <input type="radio" name="track1" value="req3">
+            <input type="radio" name="mth141,mth142,mth143" value="req3">
             MTH 141: Calculus I
             <br />
             <span>MTH 142: Calculus II</span>
@@ -268,31 +273,74 @@
      <li>CSC 280: Computer Models and Limitations</li>
      <li>CSC 282: Design and Analysis of Efficient Algorithms</li>
      <li>CSC 200: Undergraduate Problem Seminar</li>
- </ul>
+  </ul>
+  <script>courses.push("csc173,csc242,csc252,csc254,csc280,csc282,csc200");</script>
 
- <h3>Please select one of the following options:</h3>
- <input type="radio" name="track2" value="req4" checked="true">
- MTH 165: Linear Algebra with Differential Equations
-</input>
+  <h3>Please select one of the following options:</h3>
+  <input type="radio" name="mth165" value="req4" checked="true">
+    MTH 165: Linear Algebra with Differential Equations
+  </input>
 <br />
-<input type="radio" name="track2" value="req5">
+<input type="radio" name="mth173" value="req5">
 MTH 173: Honors Calculus III
 </input>
 <br />
-<input type="radio" name="track2" value="req6">
+<input type="radio" name="mth163,mth235" value="req6">
 MTH 163: Ordinary Differential Equations I
 <br />
 <span>MTH 235: Linear Algebra</span>
 </input>
 </div>
 
-<div id="tab3">
-  <h3 class="3">Please select three of the following options:</h3>
-  <?php advancedCSCTable() ?>
-</div>
+  <div id="tab3">
+    <h3 class="3">Please select three of the following options:</h3>
+    <input type="checkbox" class="check1 CSCAdvanced" name="csc210" />
+    CSC 210: Web Programming
+    <br />
+    <input type="checkbox" class="check1 CSCAdvanced" name="csc211" />
+    CSC 211: Principles of HCI
+    <br />
+    <input type="checkbox" class="check1 CSCAdvanced" name="csc212" />
+    CSC 212: Human Computer Interaction
+    <br />
+    <input type="checkbox" class="check1 CSCAdvanced" name="csc244" />
+    CSC 244: Logical Foundations of A.I.
+    <br />
+    <input type="checkbox" class="check1 CSCAdvanced" name="csc246" />
+    CSC 246: Machine Learning
+    <br />
+    <input type="checkbox" class="check1 CSCAdvanced" name="csc247" />
+    CSC 247: Natural Language Processing
+    <br />
+    <input type="checkbox" class="check1 CSCAdvanced" name="csc248" />
+    CSC 248: Statistical Speech & Language Processing<br />
+    <input type="checkbox" class="check1 CSCAdvanced" name="csc249" />
+    CSC 249: Machine Vision
+    <br />
+    <input type="checkbox" class="check1 CSCAdvanced" name="csc250" />
+    CSC 250: Corpus Linguistics
+    <br />
+    <input type="checkbox" class="check1 CSCAdvanced" name="csc253" />
+    CSC 253: Dynamic Language & Software Development
+    <br />
+    <input type="checkbox" class="check1 CSCAdvanced" name="csc255" />
+    CSC 255: Software Analysis and Improvement<br />
+    <input type="checkbox" class="check1 CSCAdvanced" name="csc256" />
+    CSC 256: Operating Systems
+    <br />
+    <input type="checkbox" class="check1 CSCAdvanced" name="csc257" />
+    CSC 257: Computer Networks
+    <br />
+    <input type="checkbox" class="check1 CSCAdvanced" name="csc258" />
+    CSC 258: Parallel & Distributed Systems
+    <br />
+    <input type="checkbox" class="check1 CSCAdvanced" name="csc260" />
+    CSC 260: Dialog Systems: Conversational Systems: From Siri and Beyond
+    <br />
+  </div>
 </div>
 
-
+<?php if(false){ ?>
 
 <h2>Major: Mathematics BS</h2>
 <div class="tabs">
@@ -395,11 +443,11 @@ MTH 163: Ordinary Differential Equations I
 
 <div id="tab6">
   <h3 class="2">Please select two of the following options:</h3>
-  <?php advancedMTHTable() ?>
+</div>
 </div>
 
 
-<?php if (array_key_exists('minor', $_POST) && $_POST('minor')=="German"){ ?>
+
 
 <h2>Major: German</h2>
 <div class="tabs">
@@ -428,10 +476,9 @@ MTH 163: Ordinary Differential Equations I
         <input type="checkbox" class="check1 GERAdvanced" name="ger204" />Ger 204: Marx<br /><input type="checkbox" class="check1 GERAdvanced" name="ger234" />GER 234: Strangers in a strange land<br /><input type="checkbox" class="check1 GERAdvanced" name="ger235" />GER 235: Hitler's Germany<br /><input type="checkbox" class="check1 GERAdvanced" name="ger275" />GER 275: Digital Cityscapes<br /><input type="checkbox" class="check1 GERAdvanced" name="ger294" />GER 294: On Genealogy<br /><input type="checkbox" class="check1 GERAdvanced" name="ger209" />GER 209: Cowboys and Indians<br /><input type="checkbox" class="check1 GERAdvanced" name="ger211" />GER 211: Jewish Writers and Rebels<br /><input type="checkbox" class="check1 GERAdvanced" name="ger215" />GER 215: Berlin: Tales of a city<br /><input type="checkbox" class="check1 GERAdvanced" name="ger288" />GER 288: Mothers, Comrades and Whores<br /><input type="checkbox" class="check1 GERAdvanced" name="ger391" />GER 391: Independent Study<br />	</div>
     </div>
 
-    <?php } ?>
 </div>
-
-<button>Continue</button>
+<?php } ?>
+<button onclick="count()">Continue</button>
 
 </body>
 </html>

@@ -1,3 +1,31 @@
+//The list of all courses that we're taking.
+var courses = [];
+
+function count(){
+
+	var newList = [];
+	for (var i=0; i<courses.length; i++){
+		var nameList = courses[i].split(",")
+    	for(var j=0;j<nameList.length;j++){
+	        newList.push(nameList[j]);
+	    }
+	}
+	courses = newList;
+
+	var inputTags = document.getElementsByTagName('input');
+	for (var i=0, length = inputTags.length; i<length; i++) {
+	    if ((inputTags[i].type == 'checkbox' || inputTags[i].type == "radio") && inputTags[i].checked) {
+	    	var nameList = inputTags[i].name.split(",")
+	    	for(var j=0;j<nameList.length;j++){
+		        courses.push(nameList[j]);
+		    }
+	    }
+	}
+
+	window.location.assign("/test.php?courses="+JSON.stringify(courses));
+}
+
+/*
 $(function(){
 	set_count($("button"));
 	
@@ -33,3 +61,4 @@ function set_count(Button) {
 		}
 	});
 }
+*/

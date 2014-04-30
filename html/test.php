@@ -3,98 +3,213 @@
 	class course{
 		var $id;
 
-		var $earliest;  //\
 		var $latest;    // Both of these are used for the planning algorithm.
 
 		var $prereqs;  //needed for the insert
-		var $postreqs; //for the topological sort
-		var $placed = -1;   //The semester in which it is placed. inf if not placed.
+		var $placed;   //The semester in which it is placed. 
 
-		var $depth; //maximum distance from a source node in the prereq graph
+		var $credits=4;
+
+		var $fall;
+		var $spring;
+	}
+
+	class outputCourse{
+		var $name;
+		var $title;
+		var $id;
+		var $clas;
+		var $credits;
+		var $pre = array();
+		var $post = array();
 	}
 
 	class semester{
-		var $type; // 0 is fall, 1 is spring.
+		var $title;
 		var $courses = array();
-	}
 
+	}
+	$inputCourses = json_decode($_GET['courses']);
+	$inputCourses = array_unique($inputCourses);
+	$courses = array();
 	$semesters = array();
 
-
-	function findEarliest($course){
-		global $semesters;
-
-		$semesterNumber = latestPrereq($course);
-		$coursenextPossibleSemester($course, $semesterNumber);
+	for ($i=0; $i<8; $i=$i+2){
+		$semesters[$i] = new semester;
+		$semesters[$i]->title = "Fall";
+		$semesters[$i+1] = new semester;
+		$semesters[$i+1]->title = "Spring";
 	}
 
-	function latestPrereq($course){
-		$max = -1;
+	//Set up an array of nodes for the topological sort.
+	$nodeIDs = array();
+	$edges = array();
 
-		foreach ($course.$prereqs as $prereq) {
-			if ($prereq.$earliest > $max)
-				$max = $prereq.$earliest;
+	//Fill in courses with data
+	$courseData = json_decode(file_get_contents("courseDB.json"), true);
+
+	foreach ($inputCourses as $inputCourse) {
+		$course = new course;
+		$temp = $courseData[$inputCourse];
+		$course->id = $temp['id'];
+		$course->latest = count($semesters)-1;
+		$course->prereqs = $temp['pre'];
+		$course->credits = $temp['credits'];
+		$course->placed = count($semesters);
+		$course->fall = true;
+		$course->spring = true;
+		$courses[$temp['id']] = $course;
+
+		//Also build the inputs for the topological sort
+		$nodeIDs[] = $course->id;
+		foreach($course->prereqs as $prereqID){
+			if(in_array($prereqID, $inputCourses)){
+				$edges[] = array($course->id, $prereqID);
+			} 
 		}
-
-		return $max;
 	}
 
-	function topological_sort($nodeids, $edges) {
-    $L = $S = $nodes = array();
-    foreach($nodeids as $id) {
-        $nodes[$id] = array('in'=>array(), 'out'=>array());
-        foreach($edges as $e) {
-            if ($id==$e[0]) { $nodes[$id]['out'][]=$e[1]; }
-            if ($id==$e[1]) { $nodes[$id]['in'][]=$e[0]; }
-        }
-    }
-    foreach ($nodes as $id=>$n) { if (empty($n['in'])) $S[]=$id; }
-    while (!empty($S)) {
-        $L[] = $id = array_shift($S);
-        foreach($nodes[$id]['out'] as $m) {
-            $nodes[$m]['in'] = array_diff($nodes[$m]['in'], array($id));
-            if (empty($nodes[$m]['in'])) { $S[] = $m; }
-        }
-        $nodes[$id]['out'] = array();
-    }
-    foreach($nodes as $n) {
-        if (!empty($n['in']) or !empty($n['out'])) {
-            return null; // not sortable as graph is cyclic
-        }
-    }
-    return $L;
-}
+	$topSortedList = topological_sort($nodeIDs, $edges);
+	computeLatests();
 
-	function place($course, $i){
-		global $semesters;
-		$semesters[$i].$courses[] = $course;
-	}
+	//Sort courses by latest!
+	$courseLookup = $courses;
+	usort($courses, "cmp");
 
-	function canTake($course, $semesterNumber){
+	//Finally place them all.
+	placeCoursesInSemesters();
+
+	printSems();
+
+	function printSems(){
 		global $semesters;
 
+		foreach($semesters as $sem){
+			echo $sem->title."<br>";
+			foreach($sem->courses as $c){
+				echo $c->id;
+				echo "<br>";
+			}
+			echo "<hr><br>";
+		}
 	}
 
-	function findLatest($course){
-
+	function fillCourseFromID($course, $id){
+		$course->name = $id;
+		$course->title = $id;
+		$course->fall = True;
+		$course->spring = True;
 	}
 
-	function updateLastests($course){
+	function computeLatests(){
+		global $topSortedList;
+		global $courses;
 
-	}
+		foreach($topSortedList as $id){
+			$course = $courses[$id];
+			$newPossibleLatest = getLatestSemester($course);
+			if($newPossibleLatest < $course->latest){
+				$course->latest = $newPossibleLatest;
+			}
 
-
-	function nextPossibleSemester($course, $semesterNumber){
-		for($i=$placeAfter; $i<count($semesters); $i++){
-
-			if( canTake($course, $i) ){
-				return $i;
+			foreach($course->prereqs as $prereqID){
+				$prereq = $courses[$prereqID];
+				$prereq->latest = $course->latest-1;
 			}
 
 		}
 	}
 
-	function placeInPreviousPossibleSemester($course, $placeAfterSemester){
-		
+	function topological_sort($nodeids, $edges) {
+	    $L = array();
+	    $S = array();
+	    $nodes = array();
+	    foreach($nodeids as $id) {
+	        $nodes[$id] = array('in'=>array(), 'out'=>array());
+	        foreach($edges as $e) {
+	            if ($id==$e[0]) { $nodes[$id]['out'][]=$e[1]; }
+	            if ($id==$e[1]) { $nodes[$id]['in'][]=$e[0]; }
+	        }
+	    }
+	    foreach ($nodes as $id=>$n) { if (empty($n['in'])) $S[]=$id; }
+	    while (!empty($S)) {
+	        $L[] = $id = array_shift($S);
+	        foreach($nodes[$id]['out'] as $m) {
+	            $nodes[$m]['in'] = array_diff($nodes[$m]['in'], array($id));
+	            if (empty($nodes[$m]['in'])) { $S[] = $m; }
+	        }
+	        $nodes[$id]['out'] = array();
+	    }
+	    foreach($nodes as $n) {
+	        if (!empty($n['in']) or !empty($n['out'])) {
+	            return null; // not sortable as graph is cyclic
+	        }
+	    }
+	    return $L;
 	}
+
+
+
+	function canTake($course, $semesterNumber){
+		global $semesters;
+		global $courseLookup;
+
+		//Don't take if it's already taken
+		if($course->placed < count($semesters)){
+			return False;
+		}
+
+		foreach($course->prereqs as $prereqID){
+			$prereq = $courseLookup[$prereqID];
+			if($prereq->placed>=$semesterNumber){
+				return False;
+			}
+		}
+
+		return True;
+	}
+
+	//Only call AFTER the topological sort!
+	function getLatestSemester($course){
+		global $semesters;
+
+		for($i = $course->latest; $i>=0; $i--){
+			if(strcmp($semesters[$i]->title, "Fall") == 0 && $course->fall){
+				return $i;
+			}
+			if(strcmp($semesters[$i]->title, "Spring") == 0 && $course->spring){
+				return $i;
+			}
+		}
+
+		return -1;
+	}
+
+	function placeCoursesInSemesters(){
+		global $courses;
+		global $semesters;
+
+
+
+		for($i=0; $i<count($semesters); $i++){
+			$maxCredits = 19;
+			$credits = 0;
+
+			$semesters[$i]->courses = array();
+			
+			foreach($courses as $course){
+				if(canTake($course, $i) && ($course->credits+$credits < $maxCredits || $course->latest == $i) ){
+					$semesters[$i]->courses[] = $course;
+					$course->placed = $i;
+					$credits = $credits + $course->credits;
+				}
+			}
+		}
+
+	}
+
+	function cmp($courseA, $courseB){
+		return $courseA->latest > $courseB->latest;
+	}
+
 ?>

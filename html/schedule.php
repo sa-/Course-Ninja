@@ -10,6 +10,7 @@
 	
 	//Global Variables
 	$courses		= array(); //Local copy of the courses in the schedule. Multiple purposes.
+	$courseData 	= array(); //Course data from the courses database table.
 	$canTake 		= array(); //Courses whose prereqs have been satisfied
 	$mustTake 		= array(); //Courses that are yet to be taken
 	$semesters 		= array(); //An array of semesters
@@ -22,25 +23,24 @@
 	//--Initializer.
 	//--Fills $prereqEdges with edges from A to B where
 	//--A is a prerequisite of B
-	function buildAdjList(){
+
+	//Creates local coopy of courses and e
+	function buildData(){
 		global $courses;
+
 		foreach ($courses as $course){
-			$adjList[$course['number']]= array(); 
-			//Incomplete here
+			$courseData[$course] = getCourseData($course);
+			$courseData[$course]['prereqs'] = getPreReqs($course);
 		}
+
+
+
 	}
 
 	function createEdge($from, $to){
-
+		$adjList[$from][$to]=1;
 	}
 
-	function getTitleByID($id){
-
-	}
-
-	function fillLocalCourses(){
-		
-	}
 	
 	//The Scheduling Function
 	function schedule(){
