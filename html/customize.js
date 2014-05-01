@@ -14,7 +14,7 @@ function count(){
 
 	var inputTags = document.getElementsByTagName('input');
 	for (var i=0, length = inputTags.length; i<length; i++) {
-	    if (inputTags[i].type == 'checkbox' && inputTags[i].checked) {
+	    if ((inputTags[i].type == 'checkbox' && inputTags[i].checked) || inputTags[i].type == 'hidden') {
 	    	var nameList = inputTags[i].name.split(",")
 	    	for(var j=0;j<nameList.length;j++){
 		        courses.push(nameList[j]);
@@ -22,14 +22,14 @@ function count(){
 	    }
 	    inputTags[i].type == "radio" && inputTags[i].checked
 	    if (inputTags[i].type == "radio" && inputTags[i].checked) {
-	    	var nameList = inputTags[i].name.split(",")
+	    	var nameList = inputTags[i].value.split(",")
 	    	for(var j=0;j<nameList.length;j++){
 		        courses.push(nameList[j]);
 		    }
 	    }
 	}
-
-	window.location.assign("/test.php?courses="+JSON.stringify(courses));
+	alert(JSON.stringify(courses));
+	//window.location.assign("/test.php?courses="+JSON.stringify(courses));
 }
 
 /*

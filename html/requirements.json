@@ -41,8 +41,9 @@
 	},
 
 	"Computer Science B.A.":{
+		"name":"Computer Science B.A.",
 		"satisfiers":[
-			["all", "CSC_prereqs","CSC_BA_tracks" ]
+			["all", "CSC_prereqs","CSC_BA_tracks"]
 		]
 	},
 

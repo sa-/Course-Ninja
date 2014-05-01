@@ -19,7 +19,9 @@
     $majors = json_decode($_GET['majors']);
     $minors = json_decode($_GET['minors']);
     $groupData = json_decode(file_get_contents("requirements.json"), true);
+    $courseData = json_decode(file_get_contents("courseDB.json"), true);
     $requiredCourses = array();
+
 
     function populate($groupName,$topLevel = False){
         global $groupData;
@@ -33,14 +35,23 @@
 
         foreach($group['satisfiers'] as $track){
             if(count($group['satisfiers']) > 1 ){
-                echo '<input type="radio" name='.$groupName.' value="male">';
+                echo '<input type="radio" name='.$groupName.' value="'.makeRadioValue($track).'">';
             }
-            expandTrack($track);
+            expandTrack($track,$topLevel);
+        }
+    }
+
+    function makeRadioValue($track){
+
+        $return = $track[1];
+        for($i=2;$i<count($track);$i++){
+            $return = $return.",".$track[$i];
         }
 
-    
+        return $return;
     }
-    function expandTrack($track){  //See requirements.json for groups
+
+    function expandTrack($track,$topLevel){  //See requirements.json for groups
         global $groupData;
 
         //Store groups so we can print them after the courses
@@ -58,7 +69,7 @@
                 $groups[]  = $track[$i];
             } else {
 
-                printCourse($track[$i],$check);
+                printCourse($track[$i],$check,$topLevel);
 
             }
             echo '<br>';
@@ -70,11 +81,14 @@
         echo '</div>';
     }
 
-    function printCourse($courseID,$check){
+    function printCourse($courseID,$check,$topLevel){
         if($check){
           echo '<input type="checkbox" name="'.$courseID.'">';
         }
-        echo $courseID;
+        if($topLevel){
+          echo '<input type="hidden" name="'.$courseID.'">';
+        }
+        print_r('<a href="http://www.skedgeur.com/?q='.$courseID.'" target="otherTab">'.$courseID.'</a>');
     }
 
     function makeTable($groupName){
@@ -212,19 +226,20 @@
     
     <?php 
 
-        // foreach($majors as $major){
-        //     makeTable($major);
-        // }
+        foreach($majors as $major){
+            makeTable($major);
+        }
 
 
-        // foreach($minors as $minor){
-        //     makeTable($minor." minor");
-        // }
+        foreach($minors as $minor){
+            makeTable($minor." minor");
+        }
 
     ?>
 
 
 
+<?php if(false){ ?>
     <h2>Major: Computer Science BS</h2>
     <div class="tabs">
         <ul>
@@ -343,7 +358,6 @@ MTH 163: Ordinary Differential Equations I
   </div>
 </div>
 
-<?php if(false){ ?>
 <h2>Major: Mathematics BS</h2>
 <div class="tabs">
     <ul>
