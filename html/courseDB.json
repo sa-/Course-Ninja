@@ -164,4 +164,5 @@
 "mth549": {"clas": "MTH549", "credits": 4, "id": "mth549", "name": "MTH 549", "pre": [], "title": "Topics in Algebraic Topology"}, 
 "mth568": {"clas": "MTH568", "credits": 4, "id": "mth568", "name": "MTH 568", "pre": [], "title": "Topics in Number Theory"}, 
 "mth569": {"clas": "MTH569", "credits": 4, "id": "mth569", "name": "MTH 569", "pre": [], "title": "Top in Analytic Number Thry"}, 
-"mth578": {"clas": "MTH578", "credits": 4, "id": "mth578", "name": "MTH 578", "pre": [], "title": "Topics in Harmonic Analysis"}}
+"mth578": {"clas": "MTH578", "credits": 4, "id": "mth578", "name": "MTH 578", "pre": [], "title": "Topics in Harmonic Analysis"}
+}

@@ -7,6 +7,7 @@
     $courseData = json_decode(file_get_contents("courseDB.json"), true);
     $requiredCourses = array();
 
+    //print_r($courseData);
 
     function populate($groupName,$topLevel=0){
         global $groupData;
@@ -73,7 +74,7 @@
         if($check){
           echo '<input type="checkbox" name="'.$courseID.'">';
         }
-        if($topLevel==0){
+        elseif($topLevel==0){
           echo '<input type="hidden" name="'.$courseID.'">';
         }
         print_r('<a href="http://www.skedgeur.com/?q='.$courseID.'" target="otherTab">'.$courseID.'</a>');
