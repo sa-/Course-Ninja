@@ -8,7 +8,7 @@
 		var $prereqs;  //needed for the insert
 		var $placed;   //The semester in which it is placed. 
 
-		var $credits=4;
+		var $credits;
 
 		var $fall;
 		var $spring;
@@ -51,13 +51,17 @@
 	$courseData = json_decode(file_get_contents("courseDB.json"), true);
 
 	foreach ($inputCourses as $inputCourse) {
-		$course = $courseData[$inputCourse];
-
+		$course = new course;
+		$temp = $courseData[$inputCourse];
+		$course->id = $temp['id'];
+		$course->title = $temp['title'];
+		$course->prereqs = $temp['pre'];
+		$course->credits = $temp['credits'];
 		$course->latest = count($semesters)-1;
 		$course->placed = count($semesters);
 		$course->fall = true;
 		$course->spring = true;
-		$courses[$course['id']] = $course;
+		$courses[$temp['id']] = $course;
 
 		//Also build the inputs for the topological sort
 		$nodeIDs[] = $course->id;
@@ -68,7 +72,6 @@
 		}
 	}
 
-	print_r($courses);
 
 	$topSortedList = topological_sort($nodeIDs, $edges);
 	computeLatests();
