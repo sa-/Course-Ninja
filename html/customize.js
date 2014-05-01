@@ -14,7 +14,14 @@ function count(){
 
 	var inputTags = document.getElementsByTagName('input');
 	for (var i=0, length = inputTags.length; i<length; i++) {
-	    if ((inputTags[i].type == 'checkbox' || inputTags[i].type == "radio") && inputTags[i].checked) {
+	    if (inputTags[i].type == 'checkbox' && inputTags[i].checked) {
+	    	var nameList = inputTags[i].name.split(",")
+	    	for(var j=0;j<nameList.length;j++){
+		        courses.push(nameList[j]);
+		    }
+	    }
+	    inputTags[i].type == "radio" && inputTags[i].checked
+	    if (inputTags[i].type == "radio" && inputTags[i].checked) {
 	    	var nameList = inputTags[i].name.split(",")
 	    	for(var j=0;j<nameList.length;j++){
 		        courses.push(nameList[j]);

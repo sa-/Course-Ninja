@@ -19,8 +19,9 @@
     $majors = json_decode($_GET['majors']);
     $minors = json_decode($_GET['minors']);
     $groupData = json_decode(file_get_contents("requirements.json"), true);
+    $requiredCourses = array();
 
-    function populate($groupName){
+    function populate($groupName,$topLevel = False){
         global $groupData;
         $group = $groupData[$groupName];
 
@@ -46,8 +47,9 @@
         $groups  = array();
 
         echo '<div>';
+        $check = False;
         if(strcmp($track[0], "all") != 0 ) {
-
+            $check = True;
             echo '<h3>Choose '.intval($track[0])." of the following options:</h3>\n";
         }
         for($i=1; $i<count($track); $i++){  
@@ -56,7 +58,7 @@
                 $groups[]  = $track[$i];
             } else {
 
-                printCourse($track[$i]);
+                printCourse($track[$i],$check);
 
             }
             echo '<br>';
@@ -65,15 +67,13 @@
         foreach($groups as $group){
             populate($group);
         }
-
         echo '</div>';
-
-
-
-
     }
 
-    function printCourse($courseID){
+    function printCourse($courseID,$check){
+        if($check){
+          echo '<input type="checkbox" name="'.$courseID.'">';
+        }
         echo $courseID;
     }
 
@@ -222,6 +222,9 @@
         // }
 
     ?>
+
+
+
     <h2>Major: Computer Science BS</h2>
     <div class="tabs">
         <ul>
@@ -240,21 +243,21 @@
             <script>courses.push("mth150,csc171,csc172");</script>
 
             <h3>Please select one of the following options:</h3>
-            <input type="radio" name="mth161,mth162" value="req1" checked="true">
+            <input type="radio" name="calc" value="mth161,mth162" checked="true">
             MTH 161: Calculus IA
             <br />
             <span>MTH 162: Calculus IIA</span>
             </input>
             <br />
             <br />
-            <input type="radio" name="mth171,mth172" value="req2">
+            <input type="radio" name="calc" value="mth161,mth162">
             MTH 171: Honors Calculus I
             <br />
             <span>MTH 172: Honors Calculus II</span>
             </input>
             <br />
             <br />
-            <input type="radio" name="mth141,mth142,mth143" value="req3">
+            <input type="radio" name="calc" value="mth161,mth162">
             MTH 141: Calculus I
             <br />
             <span>MTH 142: Calculus II</span>
@@ -277,15 +280,15 @@
   <script>courses.push("csc173,csc242,csc252,csc254,csc280,csc282,csc200");</script>
 
   <h3>Please select one of the following options:</h3>
-  <input type="radio" name="mth165" value="req4" checked="true">
+  <input type="radio" name="linalg" value="mth165" checked="true">
     MTH 165: Linear Algebra with Differential Equations
   </input>
 <br />
-<input type="radio" name="mth173" value="req5">
+<input type="radio" name="linalg" value="mth173">
 MTH 173: Honors Calculus III
 </input>
 <br />
-<input type="radio" name="mth163,mth235" value="req6">
+<input type="radio" name="linalg" value="mth163,mth235">
 MTH 163: Ordinary Differential Equations I
 <br />
 <span>MTH 235: Linear Algebra</span>
@@ -341,7 +344,6 @@ MTH 163: Ordinary Differential Equations I
 </div>
 
 <?php if(false){ ?>
-
 <h2>Major: Mathematics BS</h2>
 <div class="tabs">
     <ul>

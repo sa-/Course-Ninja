@@ -29,6 +29,8 @@
 		var $courses = array();
 
 	}
+
+
 	$inputCourses = json_decode($_GET['courses']);
 	$inputCourses = array_unique($inputCourses);
 	$courses = array();
@@ -93,6 +95,9 @@
 			echo "<hr><br>";
 		}
 	}
+
+
+	
 
 	function fillCourseFromID($course, $id){
 		$course->name = $id;
