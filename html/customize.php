@@ -1,21 +1,6 @@
 <?php
 
-        // // Create connection
-        // $con=mysqli_connect("localhost","root","EDS","URPlanner");
 
-        // // Check connection
-        // if (mysqli_connect_errno())
-        // {
-        //         echo "Failed to connect to MySQL: " . mysqli_connect_error();
-        // }
-
-        // //Create local copy of courses
-        // $result = mysqli_query($con,"select * from courses");
-        // $courses[] =mysqli_fetch_array($result);
-        // while($row = mysqli_fetch_array($result))
-        // {
-        //         $courses[] = $row;
-        // }
     $majors = json_decode($_GET['majors']);
     $minors = json_decode($_GET['minors']);
     $groupData = json_decode(file_get_contents("requirements.json"), true);
@@ -23,7 +8,7 @@
     $requiredCourses = array();
 
 
-    function populate($groupName,$topLevel = False){
+    function populate($groupName,$topLevel=0){
         global $groupData;
         $group = $groupData[$groupName];
 
@@ -33,11 +18,14 @@
             echo "<h3>Pick one of the following</h3><br>\n";
         }
 
+
+
         foreach($group['satisfiers'] as $track){
             if(count($group['satisfiers']) > 1 ){
                 echo '<input type="radio" name='.$groupName.' value="'.makeRadioValue($track).'">';
             }
             expandTrack($track,$topLevel);
+
         }
     }
 
@@ -76,7 +64,7 @@
         }
 
         foreach($groups as $group){
-            populate($group);
+            populate($group,1);
         }
         echo '</div>';
     }
@@ -85,7 +73,7 @@
         if($check){
           echo '<input type="checkbox" name="'.$courseID.'">';
         }
-        if($topLevel){
+        if($topLevel==0){
           echo '<input type="hidden" name="'.$courseID.'">';
         }
         print_r('<a href="http://www.skedgeur.com/?q='.$courseID.'" target="otherTab">'.$courseID.'</a>');
@@ -498,4 +486,3 @@ MTH 163: Ordinary Differential Equations I
 
 </body>
 </html>
-<?php mysqli_close($con); ?>

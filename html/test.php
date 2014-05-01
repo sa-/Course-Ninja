@@ -51,16 +51,13 @@
 	$courseData = json_decode(file_get_contents("courseDB.json"), true);
 
 	foreach ($inputCourses as $inputCourse) {
-		$course = new course;
-		$temp = $courseData[$inputCourse];
-		$course->id = $temp['id'];
+		$course = $courseData[$inputCourse];
+
 		$course->latest = count($semesters)-1;
-		$course->prereqs = $temp['pre'];
-		$course->credits = $temp['credits'];
 		$course->placed = count($semesters);
 		$course->fall = true;
 		$course->spring = true;
-		$courses[$temp['id']] = $course;
+		$courses[$course['id']] = $course;
 
 		//Also build the inputs for the topological sort
 		$nodeIDs[] = $course->id;
@@ -70,6 +67,8 @@
 			} 
 		}
 	}
+
+	print_r($courses);
 
 	$topSortedList = topological_sort($nodeIDs, $edges);
 	computeLatests();
@@ -94,16 +93,6 @@
 			}
 			echo "<hr><br>";
 		}
-	}
-
-
-	
-
-	function fillCourseFromID($course, $id){
-		$course->name = $id;
-		$course->title = $id;
-		$course->fall = True;
-		$course->spring = True;
 	}
 
 	function computeLatests(){
