@@ -14,7 +14,7 @@
 		var $spring;
 	}
 
-	class outputCourse{
+	class courses{
 		var $name;
 		var $title;
 		var $id;
@@ -28,6 +28,11 @@
 		var $title;
 		var $courses = array();
 
+	}
+
+	class schedule{
+		var $courses;
+		var $semesters;
 	}
 
 
@@ -83,7 +88,7 @@
 	//Finally place them all.
 	placeCoursesInSemesters();
 
-	printSems();
+	//printSems();
 
 	function printSems(){
 		global $semesters;
@@ -207,6 +212,89 @@
 
 	function cmp($courseA, $courseB){
 		return $courseA->latest > $courseB->latest;
-	}
+	}	
 
+	function generateOutput(){
+		global $semesters;
+		global $courses;
+		global $courseData;
+
+		$output = array();
+
+		$map = array();
+
+		$schedule = new schedule;
+
+		for($i=0; $i<count($courses); $i++){
+			$map[$courses[$i]->id] = $i;
+			$temp = new courses;
+			$temp->title = $courseData[$courses[$i]->id]['title'];
+			$temp->id = strtoupper($courses[$i]->id);
+			$temp->name = strtoupper($courses[$i]->id);
+			$temp->clas = strtoupper($courses[$i]->id);
+			$temp->pre = $courses[$i]->prereqs;
+			$temp->credits = $courses[$i]->credits;
+			$courses[$i] = $temp;
+		}
+
+		foreach($courses as $course){
+			for($i=0;$i<count($course->pre);$i++){
+				$course->pre[$i] = $map[$course->pre[$i]];
+			}
+		}
+
+		foreach($semesters as $semester){
+			for($i = 0; $i<count($semester->courses); $i++){
+				$semester->courses[$i] = $map[$semester->courses[$i]->id];
+			}
+		}
+
+		$schedule->courses = $courses;
+		$schedule->semesters = $semesters;
+		return json_encode($schedule);
+	}
 ?>
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>UR Planner</title>
+		<link rel="stylesheet" href="style.css" type = "text/css">
+		<script>schedule = <?php echo generateOutput(); ?></script>
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="schedule.js" type="text/javascript"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	</head>
+
+	<body>
+		
+		
+		
+		<div id="center">
+			<h1>UR Planner</h1>
+			
+			<div id="years">
+			</div>
+		</div>
+		
+		<div id="right">
+			<h2>Prerequisites</h2>
+			
+			<ul id="directions" class="non-bullet">
+				<li>Click on a course to see its prerequisites</li>
+			</ul>
+			
+			<ul id="prereq" class="non-bullet">
+				<li id="course"></li>
+				<li id="concur"></li>
+				<li id="pres"></li>
+				<li id="posts"></li>
+			</ul>
+		</div>
+
+		<button id="print" onclick="window.print()">Print</button>
+	</body>
+</html>
