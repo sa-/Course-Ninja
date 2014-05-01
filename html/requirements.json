@@ -106,6 +106,39 @@
 			["4", "ger204","ger234","ger235","ger274","ger275","ger294","ger209","ger211","ger215","ger288","ger391"]
 		]
 		
+	},
+	
+	"Computer Science Minor":{
+		"title":"Computer Science Minor",
+		"satisfiers":[
+			["all", "CSC_courses"]
+		]
+	},
+
+
+
+	"CSC_courses":{
+		"title":"Core Requirements",
+		"satisfiers":[
+			["6", "csc131","csc132","csc160","csc161","csc170","csc171","csc172","csc173","csc200","csc242","csc252","csc254","csc280","csc282","csc255","csc256","csc257","csc258","csc244","csc247","csc248","csc246","csc249","csc281","csc284","csc286","csc287","csc210","csc212"]
+		]
+		
+	},
+	
+	"German":{
+		"title":"German",
+		"satisfiers":[
+			["all","GER_courses",]
+		]
+	},
+
+	
+	"GER_courses":{
+		"title":"Core Requirements",
+		"satisfiers":[
+			["all", "ger150","ger151","ger200","ger202","ger203","clt1","clt2"]
+		]
+		
 	}
 	
 	
