@@ -3,31 +3,15 @@ var minors 		= new Array();
 
 //List of majors
 var majList = [
-	"Applied Mathematics B.S.",
 	"Computer Science B.S.",
 	"Computer Science B.A.",
 	"German",
-	"Mathematics (Honors) B.A.",
-	"Mathematics B.S.",
-	"Mathematics B.A.",
-	"Philosophy B.A.",
-	"Psychology B.A."
+	"Mathematics B.S."
 ];
 
 //List of minors
 var minorList = [
 	"Computer Science",
-	"Mathematics",
-	"Philosophy of Science",
-	"Ethics",
-	"History of Philosophy",
-	"Psychology",
-	"Psychology as a Natural Science",
-	"Psychology as a Social Science",
-	"Clinical Psychology",
-	"Health Psychology",
-	"Organizational Psychology",
-	"Social and Emotional Development",
 	"German"
 ];
 

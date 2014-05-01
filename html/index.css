@@ -20,8 +20,6 @@ h1{
 }
 
 .border{
-	border-right-style:solid;
-	border-bottom-style:solid;
 	padding-bottom:25px;
 	padding-right:25px;
 	float:left;
@@ -31,7 +29,7 @@ h1{
 
 body {
 	font-family: roboto, serif;
-	background-image: url("res/Rush.jpg");
+	background-image: url("urbackground3.jpg");
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	background-attachment: fixed;

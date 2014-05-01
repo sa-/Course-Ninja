@@ -108,7 +108,7 @@
 		
 	},
 	
-	"Computer Science Minor":{
+	"Computer Science minor":{
 		"title":"Computer Science Minor",
 		"satisfiers":[
 			["all", "CSC_courses"]
@@ -125,10 +125,10 @@
 		
 	},
 	
-	"German":{
-		"title":"German",
+	"German minor":{
+		"title":"German Minor",
 		"satisfiers":[
-			["all","GER_courses",]
+			["all","GER_courses"]
 		]
 	},
 

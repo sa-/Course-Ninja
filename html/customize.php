@@ -7,7 +7,6 @@
     $courseData = json_decode(file_get_contents("courseDB.json"), true);
     $requiredCourses = array();
 
-    //print_r($courseData);
 
     function populate($groupName,$topLevel=0){
         global $groupData;
@@ -77,7 +76,14 @@
         elseif($topLevel==0){
           echo '<input type="hidden" name="'.$courseID.'">';
         }
-        print_r('<a href="http://www.skedgeur.com/?q='.$courseID.'" target="otherTab">'.$courseID.'</a>');
+        print_r('<a href="http://www.skedgeur.com/?q='.$courseID.'" target="otherTab">'.makeTitle($courseID).'</a>');
+        //print_r($courseID,makeTitle($courseID));
+    }
+
+    function makeTitle($courseID){
+        global $courseData;
+
+        return $courseData[$courseID]['name'].": ".$courseData[$courseID]['title'];
     }
 
     function makeTable($groupName){

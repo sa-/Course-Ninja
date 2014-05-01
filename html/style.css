@@ -1,6 +1,6 @@
 body {
 	font-family: roboto, serif;
-	background-image: url("res/backgrounds/Rush.jpg");
+	background-image: url("urbackground3.jpg");
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	background-attachment: fixed;
@@ -39,7 +39,7 @@ span.expandable {
 }
 
 #center {
-	margin-left: 180px;
+	margin-left: 50px;
 	margin-right: 220px;
 }
 

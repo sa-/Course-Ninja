@@ -11,7 +11,7 @@
 "csc173": {"clas": "CSC173", "credits": 4, "id": "csc173", "name": "CSC 173", "pre": ["csc172"], "title": "Computation & Formal Systems"}, 
 "csc191": {"clas": "CSC191", "credits": 4, "id": "csc191", "name": "CSC 191", "pre": ["csc172"], "title": "Machines & Consciousness"}, 
 "csc199": {"clas": "CSC199", "credits": 4, "id": "csc199", "name": "CSC 199", "pre": [], "title": "Creative Computing"}, 
-"csc200": {"clas": "CSC200", "credits": 4, "id": "csc200", "name": "CSC 200", "pre": [], "title": "Undergrad Problem Seminar"}, 
+"csc200": {"clas": "CSC200", "credits": 4, "id": "csc200", "name": "CSC 200", "pre": ["csc172"], "title": "Undergrad Problem Seminar"}, 
 "csc200H": {"clas": "CSC200H", "credits": 4, "id": "csc200H", "name": "CSC 200H", "pre": [], "title": "Undergrad Problem Seminar"}, 
 "csc210": {"clas": "CSC210", "credits": 4, "id": "csc210", "name": "CSC 210", "pre": ["csc172"], "title": "Web Programming"}, 
 "csc211": {"clas": "CSC211", "credits": 4, "id": "csc211", "name": "CSC 211", "pre": ["csc210"], "title": "Principles of HCI"}, 

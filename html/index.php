@@ -14,7 +14,7 @@
 
 	<body>
 		<div >
-			<h1><img src="res/UofRshield.png" alt="shield" style="margin-top:20px;float:left;margin-left:35%;">
+			<h1><img src="UofRshield.png" alt="shield" style="margin-top:20px;float:left;margin-left:35%;">
 				<span class="border">UR Planner<br></span></h1>
 			</div>
 			<br>

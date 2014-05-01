@@ -29,51 +29,183 @@ function populateCenter() {
 	var all_courses = schedule.courses;
 	var col_num, year, semester, sem_courses, course;
 	var html = "";
-	
-	for (var i in schedule.years) {
-		col_num = 1;
-		year = schedule.years[i];
-		
-		html += '<h2>' + year.title + '</h2>';
-		html += '<div class="semesters">';
-	
-		for (var i in year.semesters) {
-			semester = year.semesters[i];
-			sem_courses = semester.courses
-		
-			html += '<div class="col' + col_num + '">';
-			html += '<ul class="connectedSortable semester">';
-			var html2 = "";
-			var credits = 0;
-			for (var i in sem_courses) {
-				course = all_courses[sem_courses[i]];
-				credits += course.credits;
 
-				html2 += '<li class="ui-default';
-				if (course.clas != null)
-					html2 += ' ' + course.clas;
+
+	//Start
+	col_num = 1;
+	
+	html += '<h2> Freshman Year </h2>';
+	html += '<div class="semesters">';
+	
+	for (var j = 0;j<2;j++) {
+		semester = schedule.semesters[j];
+		sem_courses = semester.courses
+	
+		html += '<div class="col' + col_num + '">';
+		html += '<ul class="connectedSortable semester">';
+		var html2 = "";
+		var credits = 0;
+		for (var i in sem_courses) {
+			course = all_courses[sem_courses[i]];
+			credits += course.credits;
+
+			html2 += '<li class="ui-default';
+			if (course.clas != null)
+				html2 += ' ' + course.clas;
+		
+			html2 += '" title="' + course.credits + ' credits"';
+	
+			if (course.id != null)
+				html2 += ' id="' + course.id + '"';
 			
-				html2 += '" title="' + course.credits + ' credits"';
-		
-				if (course.id != null)
-					html2 += ' id="' + course.id + '"';
-				
-				
-				html2 += '>' + course.name + ': ' + course.title + '</li>';
-			}
-			html += '<li class="ui-default ui-disabled semester-header">' + semester.title + 
-				' <span class="credits">(' + credits + ' credits)</span></li>';
-			html += html2 + '</ul>';
-			html += '<button class="addElective">Add an Elective</button>';
-			html += '</div>';
-	
-			col_num = col_num + 1;
+			
+			html2 += '>' + course.name + ': ' + course.title + '</li>';
 		}
-
-
+		html += '<li class="ui-default ui-disabled semester-header">' + semester.title + 
+			' <span class="credits">(' + credits + ' credits)</span></li>';
+		html += html2 + '</ul>';
+		html += '<button class="addElective">Add an Elective</button>';
 		html += '</div>';
-		html += '<br class="clear"/>';
+
+		col_num = col_num + 1;
 	}
+
+
+	html += '</div>';
+	html += '<br class="clear"/>';
+	//End
+
+	//Start
+	col_num = 1;
+	
+	html += '<h2> Sophomore Year </h2>';
+	html += '<div class="semesters">';
+	
+	for (var j = 2;j<4;j++) {
+		semester = schedule.semesters[j];
+		sem_courses = semester.courses
+	
+		html += '<div class="col' + col_num + '">';
+		html += '<ul class="connectedSortable semester">';
+		var html2 = "";
+		var credits = 0;
+		for (var i in sem_courses) {
+			course = all_courses[sem_courses[i]];
+			credits += course.credits;
+
+			html2 += '<li class="ui-default';
+			if (course.clas != null)
+				html2 += ' ' + course.clas;
+		
+			html2 += '" title="' + course.credits + ' credits"';
+	
+			if (course.id != null)
+				html2 += ' id="' + course.id + '"';
+			
+			
+			html2 += '>' + course.name + ': ' + course.title + '</li>';
+		}
+		html += '<li class="ui-default ui-disabled semester-header">' + semester.title + 
+			' <span class="credits">(' + credits + ' credits)</span></li>';
+		html += html2 + '</ul>';
+		html += '<button class="addElective">Add an Elective</button>';
+		html += '</div>';
+
+		col_num = col_num + 1;
+	}
+
+
+	html += '</div>';
+	html += '<br class="clear"/>';
+	//End
+
+	//Start
+	col_num = 1;
+	
+	html += '<h2> Junior </h2>';
+	html += '<div class="semesters">';
+	
+	for (var j = 4;j<6;j++) {
+		semester = schedule.semesters[j];
+		sem_courses = semester.courses
+	
+		html += '<div class="col' + col_num + '">';
+		html += '<ul class="connectedSortable semester">';
+		var html2 = "";
+		var credits = 0;
+		for (var i in sem_courses) {
+			course = all_courses[sem_courses[i]];
+			credits += course.credits;
+
+			html2 += '<li class="ui-default';
+			if (course.clas != null)
+				html2 += ' ' + course.clas;
+		
+			html2 += '" title="' + course.credits + ' credits"';
+	
+			if (course.id != null)
+				html2 += ' id="' + course.id + '"';
+			
+			
+			html2 += '>' + course.name + ': ' + course.title + '</li>';
+		}
+		html += '<li class="ui-default ui-disabled semester-header">' + semester.title + 
+			' <span class="credits">(' + credits + ' credits)</span></li>';
+		html += html2 + '</ul>';
+		html += '<button class="addElective">Add an Elective</button>';
+		html += '</div>';
+
+		col_num = col_num + 1;
+	}
+
+
+	html += '</div>';
+	html += '<br class="clear"/>';
+	//End
+
+	//Start
+	col_num = 1;
+	
+	html += '<h2> Senior Year </h2>';
+	html += '<div class="semesters">';
+	
+	for (var j = 6;j<8;j++) {
+		semester = schedule.semesters[j];
+		sem_courses = semester.courses
+	
+		html += '<div class="col' + col_num + '">';
+		html += '<ul class="connectedSortable semester">';
+		var html2 = "";
+		var credits = 0;
+		for (var i in sem_courses) {
+			course = all_courses[sem_courses[i]];
+			credits += course.credits;
+
+			html2 += '<li class="ui-default';
+			if (course.clas != null)
+				html2 += ' ' + course.clas;
+		
+			html2 += '" title="' + course.credits + ' credits"';
+	
+			if (course.id != null)
+				html2 += ' id="' + course.id + '"';
+			
+			
+			html2 += '>' + course.name + ': ' + course.title + '</li>';
+		}
+		html += '<li class="ui-default ui-disabled semester-header">' + semester.title + 
+			' <span class="credits">(' + credits + ' credits)</span></li>';
+		html += html2 + '</ul>';
+		html += '<button class="addElective">Add an Elective</button>';
+		html += '</div>';
+
+		col_num = col_num + 1;
+	}
+
+
+	html += '</div>';
+	html += '<br class="clear"/>';
+	//End
 	
 	document.getElementById('years').innerHTML = html;
 }
