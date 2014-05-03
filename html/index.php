@@ -13,7 +13,7 @@
 </head>
 
 	<body>
-		<div >
+		<div id="head">
 			<h1><img src="UofRshield.png" alt="shield" style="margin-top:20px;float:left;margin-left:35%;">
 				<span class="border">UR Planner<br></span></h1>
 			</div>

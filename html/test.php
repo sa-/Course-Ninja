@@ -295,6 +295,6 @@
 			</ul>
 		</div>
 
-		<button id="print" onclick="window.print()">Print</button>
+		<button id="print">Print</button>
 	</body>
 </html>
