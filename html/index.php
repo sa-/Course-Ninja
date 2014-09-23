@@ -1,58 +1,76 @@
-<html>
+<?php
 
-<head>
-	<title>Course Planner</title>
-	<meta charset="utf-8">
+require_once("common.php");
 
-    <link rel="stylesheet" href="index.css" type = "text/css">
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-	
-	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-	<script src="index.js"></script>
-</head>
+printHeader("Home", array("index.css", "http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"));
 
-	<body>
-		<div id="head">
-			<h1><img src="UofRshield.png" alt="shield" style="margin-top:20px;float:left;margin-left:35%;">
-				<span class="border">UR Planner<br></span></h1>
-			</div>
-			<br>
+?>
 
-			<div class="checker">
+<div class="jumbotron text-center">
+  <h1>UR Planner</h1>
+  <p>Please select your desired majors and minors below.</p>
+</div>
 
-				<div>
-					<div style="width:50%; float:left;">
-						<label>Major(s): </label><br>
-						<input id="majorChooser" type = "text"/>
-						<button type="button" onClick="addMajor(document.getElementById('majorChooser').value)">Add</button>
-					</div>
+<div class="container">
 
-					<div id="majorList" style="width:50%; float:left;">
-						<ul><li> .</li></ul>
-					</div>
-				</div>
+  <div class="row">
 
-				<br>
+    <div class="col-sm-6">
+      <div class="panel panel-primary">
+      
+        <div class="panel-heading">
+          <label for="majorChooser">Major(s)</label>
+        </div>
+        
+        <div class="panel-body">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" class="form-control" id="majorChooser">
+              <span class="input-group-btn">
+                <button id="majorChooserAddBtn" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+              </span>
+            </div><!-- /input-group -->
+          </div><!-- /form-group -->
+        </div>
+        
+        <ul id="majorList" class="list-group">
+        </ul>
+      </div>
+    </div>
 
-				<div>
-					<div style="width:50%; float:left;">
-						<label>Minor(s): </label><br>
-						<input id="minorChooser" type = "text"/>
-						<button type="button" onClick="addMinor(document.getElementById('minorChooser').value)">Add</button>
-					</div>
+    <div class="col-sm-6">
+      <div class="panel panel-primary">
+      
+        <div class="panel-heading">
+          <label for="minorChooser">Minor(s)</label>
+        </div>
+        
+        <div class="panel-body">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" class="form-control" id="minorChooser">
+              <span class="input-group-btn">
+                <button id="minorChooserAddBtn" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+              </span>
+            </div><!-- /input-group -->
+          </div><!-- /form-group -->
+        </div>
+        
+        <ul id="minorList" class="list-group">
+        </ul>
+      </div>
+    </div>
+  </div>
 
-					<div id="minorList" style="width:50%; float:left;">
-						<ul><li>.</li></ul>
-					</div>
+  <div class="text-center">
+      <button id="continueBtn" class="btn btn-success btn-lg" type="button">Continue</button>
 
-				</div>
+  </div>
 
-				<br><br><br>
+</div>
 
-				<button type="button" onClick="continueToNextPage()">Continue</button>
+<?php
 
-			</div>
+printFooter(array("http://code.jquery.com/ui/1.10.3/jquery-ui.js", "index.js"));
 
-		</body>
-</html>
+?>

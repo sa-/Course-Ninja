@@ -1,6 +1,6 @@
-h1{
+/*h1{
 	text-align:center;
-}
+}*/
 
 .checker{margin-left:200px;
 	margin-right:200px;
@@ -27,7 +27,7 @@ h1{
 	font-family: roboto, serif;
 }
 
-body {
+/*body {
 	font-family: roboto, serif;
 	background-image: url("urbackground3.jpg");
 	background-repeat: no-repeat;
@@ -38,4 +38,4 @@ body {
 
 ul {
 	list-style-type: none;
-}
+}*/
