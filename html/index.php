@@ -8,7 +8,7 @@ printHeader("Home", array("index.css", "http://code.jquery.com/ui/1.10.3/themes/
 
 <div class="jumbotron text-center">
   <h1>UR Planner</h1>
-  <p>Please select your desired majors and minors below.</p>
+  <p>Please choose your majors and minors below.</p>
 </div>
 
 <div class="container">
@@ -16,10 +16,10 @@ printHeader("Home", array("index.css", "http://code.jquery.com/ui/1.10.3/themes/
   <div class="row">
 
     <div class="col-sm-6">
-      <div class="panel panel-primary">
+      <div class="panel panel-default">
       
         <div class="panel-heading">
-          <label for="majorChooser">Major(s)</label>
+          <label for="majorChooser">Majors</label>
         </div>
         
         <div class="panel-body">
@@ -39,10 +39,10 @@ printHeader("Home", array("index.css", "http://code.jquery.com/ui/1.10.3/themes/
     </div>
 
     <div class="col-sm-6">
-      <div class="panel panel-primary">
+      <div class="panel panel-default">
       
         <div class="panel-heading">
-          <label for="minorChooser">Minor(s)</label>
+          <label for="minorChooser">Minors</label>
         </div>
         
         <div class="panel-body">
@@ -63,7 +63,7 @@ printHeader("Home", array("index.css", "http://code.jquery.com/ui/1.10.3/themes/
   </div>
 
   <div class="text-center">
-      <button id="continueBtn" class="btn btn-success btn-lg" type="button">Continue</button>
+      <button id="continueBtn" class="btn btn-primary btn-lg" type="button">Continue</button>
 
   </div>
 

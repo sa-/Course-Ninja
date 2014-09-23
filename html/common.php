@@ -20,8 +20,9 @@ function printHeader($pageTitle, $extraCss=array()) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Course planner for University of Rochester students">
-    <!--<meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">-->
+    <!--<meta name="author" content="">-->
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/appicon.png" />
 
     <title><?php printf("%s &ndash; %s", $GLOBALS['siteName'], $pageTitle); ?></title>
     

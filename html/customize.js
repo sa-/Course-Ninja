@@ -37,6 +37,12 @@ function count(){
 	window.location.assign("/test.php?courses="+JSON.stringify(courses));
 }
 
+//$( ".tabs" ).tabs();
+
+$("#continueBtn").click(function() {
+  count();
+});
+
 /*
 $(function(){
 	set_count($("button"));

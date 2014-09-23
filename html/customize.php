@@ -1,5 +1,7 @@
 <?php
 
+require_once("common.php");
+
 
     $majors = json_decode($_GET['majors']);
     $minors = json_decode($_GET['minors']);
@@ -91,41 +93,58 @@
 
         //Get the group from its name.
         $group = $groupData[$groupName];
+        
+        echo "\n\t\t<div class=\"panel panel-primary\">";
 
         //Display title
-        echo "\t\t<h2>".$group['title'].'</h2>';
+        echo "\t\t<div class=\"panel-heading\"><h3 class=\"panel-title\">".$group['title'].'</h3></div>';
 
 
         //Create a div
-        echo "\n\t<div class=\"tabs\">\n";
+        echo "\n\t<div class=\"panel-body\">\n";
 
         //Make the tabs
-        echo "\t\t<ul>";
+        echo "\t\t<ul class=\"nav nav-tabs\" role=\"tablist\">";
         $satisfiers = $group['satisfiers'][0];
 
         for($i=1; $i<count($satisfiers); $i++){
             //Get the group
             $satGroup = $groupData[$satisfiers[$i]];
+            
+            $liAttrs = "";
+            
+            if ($i == 1) {
+              $liAttrs .= " class=\"active\"";
+            }
 
             //Make its tab.
-            echo "\n\t\t\t<li><a href=\"#tab".$i."\">".$satGroup['title']."</a></li>";
+            echo "\n\t\t\t<li$liAttrs><a href=\"#tab-" . base64_encode($groupName) . "-$i\" role=\"tab\" data-toggle=\"tab\">".$satGroup['title']."</a></li>";
         }
         echo "\n\t\t</ul>\n";
+        
+        echo "\n\t\t<div class=\"tab-content\">";
 
         //Populate the tabs
         for($i=1; $i<count($satisfiers); $i++){
             //Get the group
             $satGroup = $satisfiers[$i];
+            
+            $classes = "tab-pane fade";
+            if ($i == 1) {
+              $classes .= " in active";
+            }
 
             //Create the div for it
-            echo "\n\t\t<div id=\"tab".$i."\">\n";
+            echo "\n\t\t<div class=\"$classes\" id=\"tab-" . base64_encode($groupName) . "-$i\">\n";
             populate($satGroup);
             echo "\n\t\t</div>\n";
 
         }
+        
+        echo "\n\t\t</div>";
 
-        //End the div whose id="tabs" 
-        echo "\n\t</div>\n\n";
+        //End the divs
+        echo "\n\t</div></div>\n\n";
     }
 
     function getGroup($groupName){
@@ -140,48 +159,35 @@
         return -1;
     }
 
+printHeader("Customize your schedule", array("customize.css"));
 
+?>
 
-?> 
+<div class="container">
 
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Customize your Schedule</title>
-    <link rel="stylesheet" href="customize.css" type = "text/css">
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script src="customize.js" type="text/javascript"></script>
-    <script>
-     $(function() {
-        $( ".tabs" ).tabs();
-    });
-    </script>
-</head>
-
-<body>
-
-
-
-
-    <h1>Select your courses</h1>
-    
+  <h1>Select your courses</h1>
+  
+  <div class="row">
     <?php 
 
-        foreach($majors as $major){
-            makeTable($major);
-        }
+    foreach($majors as $major){
+        makeTable($major);
+    }
 
 
-        foreach($minors as $minor){
-            makeTable($minor." minor");
-        }
+    foreach($minors as $minor){
+        makeTable($minor." minor");
+    }
 
     ?>
+  </div>
 
+  <button id="continueBtn" class="btn btn-primary btn-lg">Continue</button>
 
+</div>
 
-<button onclick="count()">Continue</button>
+<?php
 
-</body>
-</html>
+printFooter(array("http://code.jquery.com/ui/1.10.3/jquery-ui.js", "customize.js"));
+
+?>
