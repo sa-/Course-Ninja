@@ -1,5 +1,27 @@
-var majors 		= new Array();
-var minors 		= new Array();
+function getMajors() {
+  return JSON.parse(sessionStorage.getItem("majors"));
+}
+
+function setMajors(val) {
+  sessionStorage.setItem("majors", JSON.stringify(val));
+}
+
+function getMinors() {
+  return JSON.parse(sessionStorage.getItem("minors"));
+}
+
+function setMinors(val) {
+  sessionStorage.setItem("minors", JSON.stringify(val));
+}
+
+var BUILD_LIST_NO_CHANGE = {name:null, index:-1};
+
+if (!sessionStorage.majors) {
+  setMajors(new Array());
+}
+if (!sessionStorage.minors) {
+  setMinors(new Array());
+}
 
 //List of majors
 var majList = [
@@ -17,7 +39,9 @@ var minorList = [
 
 function addMajor(name){
 	if($.inArray(name, majList)>-1){
-		majors.push(name);
+    var majors = getMajors();
+    majors.push(name);
+    setMajors(majors);
     buildMajorsList(null);
     $('#majorChooser').val("");
 	}
@@ -28,7 +52,9 @@ function addMajor(name){
 
 function addMinor(name){
 	if($.inArray(name, minorList)>-1){
+    var minors = getMinors();
     minors.push(name);
+    setMinors(minors);
     buildMinorsList(null);
     $('#minorChooser').val("");
   }
@@ -39,8 +65,13 @@ function addMinor(name){
 
 // builds the majors list
 // should be called iff an item is added or removed to/from the list
-// removeItem = an object with an index and a name to be removed from the list (or null)
+// 
+// removeItem = an object with an index and a name to be removed from the list
+//              should be null if an object is being added
+//              should be BUILD_LIST_NO_CHANGE if the list has not been changed
 function buildMajorsList(removeItem) {
+  var majors = getMajors();
+  console.log(majors);
 	var html= "";
 	for(i=0;i<majors.length;i++){
     
@@ -68,8 +99,12 @@ function buildMajorsList(removeItem) {
 
 // builds the minors list
 // should be called iff an item is added or removed to/from the list
-// removeItem = an object with an index and a name to be removed from the list (or null)
+// 
+// removeItem = an object with an index and a name to be removed from the list
+//              should be null if an object is being added
+//              should be BUILD_LIST_NO_CHANGE if the list has not been changed
 function buildMinorsList(removeItem) {
+  var minors = getMinors();
 	var html= "";
 	for(i=0;i<minors.length;i++){
     
@@ -105,7 +140,7 @@ function buildListItem(classes,name) {
 // name = name of item to be displayed to user
 // onclick = some JS to run when the li is clicked (or null)
 function buildListItem(classes,name,onclick) {
-  var li = "<li class=\"list-group-item" + classes + "\"";
+  var li = "<li class=\"list-group-item list-group-item-info " + classes + "\"";
   if (onclick != null) {
     li += " onclick=\"" + onclick + "\"";
   }
@@ -123,21 +158,39 @@ function animateListItems() {
 }
 
 function removeMajor(index) {
+  var majors = getMajors();
   var removedItem = majors.splice(index, 1)[0];
+  setMajors(majors);
   buildMajorsList({name: removedItem, index: index});
 }
 
 function removeMinor(index) {
+  var minors = getMinors();
   var removedItem = minors.splice(index, 1)[0];
+  setMinors(minors);
   buildMinorsList({name: removedItem, index: index});
 }
 
+// preps listeners for list item remove buttons
+function listenRemoveLiBtn() {
+  $(".js-remove-li-btn").hover(
+    function() {
+      ($(this).parents(".list-group-item")).addClass("list-group-item-danger");
+      ($(this).parents(".list-group-item")).removeClass("list-group-item-info");
+    }, function() {
+      ($(this).parents(".list-group-item")).removeClass("list-group-item-danger");
+      ($(this).parents(".list-group-item")).addClass("list-group-item-info");
+    }
+  );
+  $(".js-remove-li-btn").tooltip();
+}
+
 function continueToNextPage(){
-  if (majors.length == 0 && minors.length == 0) {
+  if (getMajors().length == 0 && getMinors().length == 0) {
     $('#modalNothingSelected').modal('show');
     return;
   }
-	window.location.assign("customize.php?majors="+JSON.stringify(majors)+"&minors="+JSON.stringify(minors));
+	window.location.assign("customize.php?majors="+JSON.stringify(getMajors())+"&minors="+JSON.stringify(getMinors()));
 }
 
 
@@ -170,16 +223,6 @@ $("#continueBtn").click(function() {
   continueToNextPage();
 });
 
-function listenRemoveLiBtn() {
-  $(".js-remove-li-btn").hover(
-    function() {
-      ($(this).parents(".list-group-item")).addClass("list-group-item-danger");
-      $('#element').tooltip('show');
-    }, function() {
-      ($(this).parents(".list-group-item")).removeClass("list-group-item-danger");
-      $('#element').tooltip('hide');
-    }
-  );
-  $(".js-remove-li-btn").tooltip();
-}
 listenRemoveLiBtn();
+buildMajorsList(BUILD_LIST_NO_CHANGE);
+buildMinorsList(BUILD_LIST_NO_CHANGE);

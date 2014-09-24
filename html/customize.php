@@ -19,9 +19,8 @@ require_once("common.php");
         if(count($group['satisfiers']) > 1 ){
             echo "<h3>Pick one of the following</h3>\n";
         }
-
-
-
+        
+        
         foreach($group['satisfiers'] as $track){
             if(count($group['satisfiers']) > 1 ){
                 echo '<div class="radio courses-pick-one"><label><input type="radio" name='.$groupName.' value="'.makeRadioValue($track).'">';
@@ -54,7 +53,7 @@ require_once("common.php");
         $check = False;
         if(strcmp($track[0], "all") != 0 ) {
             $check = True;
-            echo '<h3>Choose '.intval($track[0])." of the following options:</h3>\n";
+            echo '<h3>Choose '.intval($track[0])." of the following options</h3>\n";
         }
         for($i=1; $i<count($track); $i++){  
             //Don't print if it's a group.
@@ -79,7 +78,7 @@ require_once("common.php");
           echo '<div class="checkbox"><label><input type="checkbox" name="'.$courseID.'">';
         }
         elseif($topLevel==0){
-          echo '<div class="checkbox disabled"><label><input type="checkbox" checked disabled title="This course is required" name="'.$courseID.'">';
+          echo '<div class="checkbox disabled"><label title="This course is required."><input type="checkbox" checked disabled name="'.$courseID.'">';
         }
         print_r('<div class="course-name">' . makeTitle($courseID) . '&nbsp;<a href="http://www.skedgeur.com/?q='.$courseID.'" target="otherTab"><span class="glyphicon glyphicon-info-sign"></span></a></div>');
         //print_r($courseID,makeTitle($courseID));
@@ -174,12 +173,15 @@ require_once("common.php");
     
 
 printHeader("Customize your schedule", array("css/customize.css"));
+printNavbar();
 
 ?>
 
 <div class="container">
 
-  <h1>Select your courses</h1>
+  <div class="page-header">
+    <h1>Select your courses</h1>
+  </div>
   
   <div class="row">
     <?php 

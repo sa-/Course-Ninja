@@ -68,15 +68,41 @@ function printHeader($pageTitle, $extraCss=array()) {
 }
 
 /**
- * Prints the site's navbar/jumbotron
+ * Prints the site's jumbotron/page title
  *
  * subtitle = text to be displayed below site title
  */
-function printNavbar($subtitle) {
+function printJumbotron($subtitle) {
   ?>
   <div class="jumbotron text-center">
     <h1><?php echo $GLOBALS["siteName"]; ?></h1>
     <p><?php echo $subtitle; ?></p>
+  </div>
+  <?php
+}
+
+/**
+ * Prints the site's navbar
+ */
+function printNavbar() {
+  ?>
+  <div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.php"><?php echo $GLOBALS['siteName']; ?></a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="index.php">Home</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
   </div>
   <?php
 }

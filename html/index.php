@@ -3,7 +3,7 @@
 require_once("common.php");
 
 printHeader("Home", array("css/flick/jquery-ui-1.10.4.custom.min.css", "css/index.css"));
-printNavbar('Pick your majors and minors below to <span class="nobr">get started.</span>');
+printJumbotron('Pick your majors and minors below to <span class="nobr">get started.</span>');
 
 ?>
 

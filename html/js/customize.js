@@ -43,6 +43,8 @@ $("#continueBtn").click(function() {
   count();
 });
 
+$(".disabled-checkbox-container").tooltip();
+
 /*
 $(function(){
 	set_count($("button"));
