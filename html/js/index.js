@@ -38,7 +38,7 @@ var minorList = [
 ];
 
 function addMajor(name){
-	if($.inArray(name, majList)>-1){
+	if($.inArray(name, majList)>-1 && !($.inArray(name, getMajors())>-1)){
     var majors = getMajors();
     majors.push(name);
     setMajors(majors);
@@ -51,7 +51,7 @@ function addMajor(name){
 }
 
 function addMinor(name){
-	if($.inArray(name, minorList)>-1){
+	if($.inArray(name, minorList>-1) && !($.inArray(name, getMinors())>-1)){
     var minors = getMinors();
     minors.push(name);
     setMinors(minors);
@@ -71,7 +71,6 @@ function addMinor(name){
 //              should be BUILD_LIST_NO_CHANGE if the list has not been changed
 function buildMajorsList(removeItem) {
   var majors = getMajors();
-  console.log(majors);
 	var html= "";
 	for(i=0;i<majors.length;i++){
     
@@ -140,11 +139,11 @@ function buildListItem(classes,name) {
 // name = name of item to be displayed to user
 // onclick = some JS to run when the li is clicked (or null)
 function buildListItem(classes,name,onclick) {
-  var li = "<li class=\"list-group-item list-group-item-info " + classes + "\"";
+  var li = "<li class=\"list-group-item list-group-item-info " + classes + "\"><a";
   if (onclick != null) {
     li += " onclick=\"" + onclick + "\"";
   }
-  li += "><a class=\"text-warning pull-right js-remove-li-btn remove-li-btn\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Delete\"><span class=\"glyphicon glyphicon-remove\"></span></a> " + name + " </li>";
+  li += " class=\"pull-right js-remove-li-btn remove-li-btn\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Delete\"><span class=\"glyphicon glyphicon-remove\"></span></a> " + name + " </li>";
   return li;d
 }
 
@@ -221,6 +220,13 @@ $("#minorChooserAddBtn").click(function() {
 
 $("#continueBtn").click(function() {
   continueToNextPage();
+});
+
+$("#resetBtn").click(function() {
+  setMajors(new Array());
+  setMinors(new Array());
+  buildMajorsList(BUILD_LIST_NO_CHANGE);
+  buildMinorsList(BUILD_LIST_NO_CHANGE);
 });
 
 listenRemoveLiBtn();

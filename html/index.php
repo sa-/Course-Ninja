@@ -62,6 +62,7 @@ printJumbotron('Pick your majors and minors below to <span class="nobr">get star
     <div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
       <div class="well">
           <button id="continueBtn" class="btn btn-primary btn-lg btn-block" type="button">Continue</button>
+          <button id="resetBtn" class="btn btn-default btn-lg btn-block" type="button">Reset</button>
       </div>
     </div>
   </div>
