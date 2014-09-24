@@ -68,6 +68,20 @@ function printHeader($pageTitle, $extraCss=array()) {
 }
 
 /**
+ * Prints the site's navbar/jumbotron
+ *
+ * subtitle = text to be displayed below site title
+ */
+function printNavbar($subtitle) {
+  ?>
+  <div class="jumbotron text-center">
+    <h1><?php echo $GLOBALS["siteName"]; ?></h1>
+    <p><?php echo $subtitle; ?></p>
+  </div>
+  <?php
+}
+
+/**
  * Prints the site's common page footer
  *
  * extraCss = an array of URLs for additional JS files this page needs

@@ -17,16 +17,19 @@ require_once("common.php");
         //Create radio button group if we must.
 
         if(count($group['satisfiers']) > 1 ){
-            echo "<h3>Pick one of the following</h3><br>\n";
+            echo "<h3>Pick one of the following</h3>\n";
         }
 
 
 
         foreach($group['satisfiers'] as $track){
             if(count($group['satisfiers']) > 1 ){
-                echo '<input type="radio" name='.$groupName.' value="'.makeRadioValue($track).'">';
+                echo '<div class="radio courses-pick-one"><label><input type="radio" name='.$groupName.' value="'.makeRadioValue($track).'">';
             }
             expandTrack($track,$topLevel);
+            if(count($group['satisfiers']) > 1 ){
+                echo '</label></div>';
+            }
 
         }
     }
@@ -62,7 +65,7 @@ require_once("common.php");
                 printCourse($track[$i],$check,$topLevel);
 
             }
-            echo '<br>';
+            //echo '<br>';
         }
 
         foreach($groups as $group){
@@ -73,13 +76,16 @@ require_once("common.php");
 
     function printCourse($courseID,$check,$topLevel){
         if($check){
-          echo '<input type="checkbox" name="'.$courseID.'">';
+          echo '<div class="checkbox"><label><input type="checkbox" name="'.$courseID.'">';
         }
         elseif($topLevel==0){
-          echo '<input type="hidden" name="'.$courseID.'">';
+          echo '<div class="checkbox disabled"><label><input type="checkbox" checked disabled title="This course is required" name="'.$courseID.'">';
         }
-        print_r('<a href="http://www.skedgeur.com/?q='.$courseID.'" target="otherTab">'.makeTitle($courseID).'</a>');
+        print_r('<div class="course-name">' . makeTitle($courseID) . '&nbsp;<a href="http://www.skedgeur.com/?q='.$courseID.'" target="otherTab"><span class="glyphicon glyphicon-info-sign"></span></a></div>');
         //print_r($courseID,makeTitle($courseID));
+        if ($check || $topLevel==0) {
+          echo "</label></div>";
+        }
     }
 
     function makeTitle($courseID){
@@ -94,7 +100,7 @@ require_once("common.php");
         //Get the group from its name.
         $group = $groupData[$groupName];
         
-        echo "\n\t\t<div class=\"panel panel-primary\">";
+        echo "\n\t\t<div class=\"col-lg-6\"><div class=\"panel panel-primary\">";
 
         //Display title
         echo "\t\t<div class=\"panel-heading\"><h3 class=\"panel-title\">".$group['title'].'</h3></div>';
@@ -118,7 +124,7 @@ require_once("common.php");
             }
 
             //Make its tab.
-            echo "\n\t\t\t<li$liAttrs><a href=\"#tab-" . base64_encode($groupName) . "-$i\" role=\"tab\" data-toggle=\"tab\">".$satGroup['title']."</a></li>";
+            echo "\n\t\t\t<li$liAttrs><a href=\"#tab-" . makeSafeForCss($groupName) . "-$i\" role=\"tab\" data-toggle=\"tab\">".$satGroup['title']."</a></li>";
         }
         echo "\n\t\t</ul>\n";
         
@@ -135,7 +141,7 @@ require_once("common.php");
             }
 
             //Create the div for it
-            echo "\n\t\t<div class=\"$classes\" id=\"tab-" . base64_encode($groupName) . "-$i\">\n";
+            echo "\n\t\t<div class=\"$classes\" id=\"tab-" . makeSafeForCss($groupName) . "-$i\">\n";
             populate($satGroup);
             echo "\n\t\t</div>\n";
 
@@ -144,7 +150,7 @@ require_once("common.php");
         echo "\n\t\t</div>";
 
         //End the divs
-        echo "\n\t</div></div>\n\n";
+        echo "\n\t</div></div></div>\n\n";
     }
 
     function getGroup($groupName){
@@ -158,8 +164,16 @@ require_once("common.php");
         //Returns -1 if it's an error.
         return -1;
     }
+    
+    // converts any string to a valid CSS class name
+    // credit to tsi: http://stackoverflow.com/a/12351201/992504
+    function makeSafeForCss($className) {
+      $cleanName = preg_replace('/\W+/','',strtolower($className));
+      return $cleanName;
+    }
+    
 
-printHeader("Customize your schedule", array("customize.css"));
+printHeader("Customize your schedule", array("css/customize.css"));
 
 ?>
 
@@ -181,13 +195,19 @@ printHeader("Customize your schedule", array("customize.css"));
 
     ?>
   </div>
-
-  <button id="continueBtn" class="btn btn-primary btn-lg">Continue</button>
+  
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
+      <div class="well">
+          <button id="continueBtn" class="btn btn-primary btn-lg btn-block" type="button">Continue</button>
+      </div>
+    </div>
+  </div>
 
 </div>
 
 <?php
 
-printFooter(array("http://code.jquery.com/ui/1.10.3/jquery-ui.js", "customize.js"));
+printFooter(array("js/jquery-ui-1.10.4.custom.min.js", "js/customize.js"));
 
 ?>

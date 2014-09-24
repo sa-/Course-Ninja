@@ -2,14 +2,10 @@
 
 require_once("common.php");
 
-printHeader("Home", array("index.css", "http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"));
+printHeader("Home", array("css/flick/jquery-ui-1.10.4.custom.min.css", "css/index.css"));
+printNavbar('Pick your majors and minors below to <span class="nobr">get started.</span>');
 
 ?>
-
-<div class="jumbotron text-center">
-  <h1>UR Planner</h1>
-  <p>Please choose your majors and minors below.</p>
-</div>
 
 <div class="container">
 
@@ -61,16 +57,36 @@ printHeader("Home", array("index.css", "http://code.jquery.com/ui/1.10.3/themes/
       </div>
     </div>
   </div>
-
-  <div class="text-center">
-      <button id="continueBtn" class="btn btn-primary btn-lg" type="button">Continue</button>
-
+  
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
+      <div class="well">
+          <button id="continueBtn" class="btn btn-primary btn-lg btn-block" type="button">Continue</button>
+      </div>
+    </div>
   </div>
 
 </div>
 
+<div id="modalNothingSelected" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Uh oh!</h4>
+      </div>
+      <div class="modal-body">
+        You haven't picked anything! Please select at least one major or minor.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <?php
 
-printFooter(array("http://code.jquery.com/ui/1.10.3/jquery-ui.js", "index.js"));
+printFooter(array("js/jquery-ui-1.10.4.custom.min.js", "js/index.js"));
 
 ?>
