@@ -223,16 +223,20 @@ $("#continueBtn").click(function() {
 });
 
 $("#resetBtn").click(function() {
-  var TRANSITION_EFFECT = "fade";
-  $(".js-fade-on-reset-home").hide(TRANSITION_EFFECT);
-  $(".js-fade-on-reset-home").queue(function() {
-      setMajors(new Array());
-      setMinors(new Array());
-      buildMajorsList(BUILD_LIST_NO_CHANGE);
-      buildMinorsList(BUILD_LIST_NO_CHANGE);
-      $(this).dequeue();
-    })
-  $(".js-fade-on-reset-home").show(TRANSITION_EFFECT);
+  
+  // only do a reset if another reset is not currently in progress
+  if ($(".js-fade-on-reset-home").css("opacity") == 1) {
+    var TRANSITION_EFFECT = "fade";
+    $(".js-fade-on-reset-home").hide(TRANSITION_EFFECT);
+    $(".js-fade-on-reset-home").queue(function() {
+        setMajors(new Array());
+        setMinors(new Array());
+        buildMajorsList(BUILD_LIST_NO_CHANGE);
+        buildMinorsList(BUILD_LIST_NO_CHANGE);
+        $(this).dequeue();
+      })
+    $(".js-fade-on-reset-home").show(TRANSITION_EFFECT);
+  }
 });
 
 listenRemoveLiBtn();
