@@ -114,10 +114,12 @@ function printNavbar() {
  */
 function printFooter($extraJs=array()) {
     ?>
-    <hr>
-    <footer class="text-center">
-      Created by some people in 2014
-    </footer>
+    <div class="js-fade-on-reset-home">
+      <hr>
+      <footer class="text-center">
+        Created by some people in 2014
+      </footer>
+    </div>
     
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

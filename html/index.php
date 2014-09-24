@@ -7,7 +7,7 @@ printJumbotron('Pick your majors and minors below to <span class="nobr">get star
 
 ?>
 
-<div class="container">
+<div class="container js-fade-on-reset-home">
 
   <div class="row">
 

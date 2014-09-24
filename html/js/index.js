@@ -223,10 +223,16 @@ $("#continueBtn").click(function() {
 });
 
 $("#resetBtn").click(function() {
-  setMajors(new Array());
-  setMinors(new Array());
-  buildMajorsList(BUILD_LIST_NO_CHANGE);
-  buildMinorsList(BUILD_LIST_NO_CHANGE);
+  var TRANSITION_EFFECT = "fade";
+  $(".js-fade-on-reset-home").hide(TRANSITION_EFFECT);
+  $(".js-fade-on-reset-home").queue(function() {
+      setMajors(new Array());
+      setMinors(new Array());
+      buildMajorsList(BUILD_LIST_NO_CHANGE);
+      buildMinorsList(BUILD_LIST_NO_CHANGE);
+      $(this).dequeue();
+    })
+  $(".js-fade-on-reset-home").show(TRANSITION_EFFECT);
 });
 
 listenRemoveLiBtn();
