@@ -1,58 +1,93 @@
-<html>
+<?php
 
-<head>
-	<title>Course Planner</title>
-	<meta charset="utf-8">
+require_once("common.php");
 
-    <link rel="stylesheet" href="index.css" type = "text/css">
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-	
-	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-	<script src="index.js"></script>
-</head>
+printHeader("Home", array("css/flick/jquery-ui-1.10.4.custom.min.css", "css/index.css"));
+printJumbotron('Pick your majors and minors below to <span class="nobr">get started.</span>');
 
-	<body>
-		<div id="head">
-			<h1><img src="UofRshield.png" alt="shield" style="margin-top:20px;float:left;margin-left:35%;">
-				<span class="border">UR Planner<br></span></h1>
-			</div>
-			<br>
+?>
 
-			<div class="checker">
+<div class="container js-fade-on-reset-home">
 
-				<div>
-					<div style="width:50%; float:left;">
-						<label>Major(s): </label><br>
-						<input id="majorChooser" type = "text"/>
-						<button type="button" onClick="addMajor(document.getElementById('majorChooser').value)">Add</button>
-					</div>
+  <div class="row">
 
-					<div id="majorList" style="width:50%; float:left;">
-						<ul><li> .</li></ul>
-					</div>
-				</div>
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+      
+        <div class="panel-heading">
+          <label for="majorChooser">Majors</label>
+        </div>
+        
+        <div class="panel-body">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" class="form-control" id="majorChooser">
+              <span class="input-group-btn">
+                <button id="majorChooserAddBtn" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+              </span>
+            </div><!-- /input-group -->
+          </div><!-- /form-group -->
+        </div>
+        
+        <ul id="majorList" class="list-group">
+        </ul>
+      </div>
+    </div>
 
-				<br>
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+      
+        <div class="panel-heading">
+          <label for="minorChooser">Minors</label>
+        </div>
+        
+        <div class="panel-body">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" class="form-control" id="minorChooser">
+              <span class="input-group-btn">
+                <button id="minorChooserAddBtn" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+              </span>
+            </div><!-- /input-group -->
+          </div><!-- /form-group -->
+        </div>
+        
+        <ul id="minorList" class="list-group">
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
+      <div class="well">
+          <button id="continueBtn" class="btn btn-primary btn-lg btn-block" type="button">Continue</button>
+          <button id="resetBtn" class="btn btn-default btn-lg btn-block" type="button">Reset</button>
+      </div>
+    </div>
+  </div>
 
-				<div>
-					<div style="width:50%; float:left;">
-						<label>Minor(s): </label><br>
-						<input id="minorChooser" type = "text"/>
-						<button type="button" onClick="addMinor(document.getElementById('minorChooser').value)">Add</button>
-					</div>
+</div>
 
-					<div id="minorList" style="width:50%; float:left;">
-						<ul><li>.</li></ul>
-					</div>
+<div id="modalNothingSelected" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Uh oh!</h4>
+      </div>
+      <div class="modal-body">
+        You haven't picked anything! Please select at least one major or minor.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Got it!</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-				</div>
+<?php
 
-				<br><br><br>
+printFooter(array("js/jquery-ui-1.10.4.custom.min.js", "js/index.js"));
 
-				<button type="button" onClick="continueToNextPage()">Continue</button>
-
-			</div>
-
-		</body>
-</html>
+?>

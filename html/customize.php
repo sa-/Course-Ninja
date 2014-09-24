@@ -1,5 +1,7 @@
 <?php
 
+require_once("common.php");
+
 
     $majors = json_decode($_GET['majors']);
     $minors = json_decode($_GET['minors']);
@@ -15,16 +17,18 @@
         //Create radio button group if we must.
 
         if(count($group['satisfiers']) > 1 ){
-            echo "<h3>Pick one of the following</h3><br>\n";
+            echo "<h3>Pick one of the following</h3>\n";
         }
-
-
-
+        
+        
         foreach($group['satisfiers'] as $track){
             if(count($group['satisfiers']) > 1 ){
-                echo '<input type="radio" name='.$groupName.' value="'.makeRadioValue($track).'">';
+                echo '<div class="radio courses-pick-one"><label><input type="radio" name='.$groupName.' value="'.makeRadioValue($track).'">';
             }
             expandTrack($track,$topLevel);
+            if(count($group['satisfiers']) > 1 ){
+                echo '</label></div>';
+            }
 
         }
     }
@@ -49,7 +53,7 @@
         $check = False;
         if(strcmp($track[0], "all") != 0 ) {
             $check = True;
-            echo '<h3>Choose '.intval($track[0])." of the following options:</h3>\n";
+            echo '<h3>Choose '.intval($track[0])." of the following options</h3>\n";
         }
         for($i=1; $i<count($track); $i++){  
             //Don't print if it's a group.
@@ -60,7 +64,7 @@
                 printCourse($track[$i],$check,$topLevel);
 
             }
-            echo '<br>';
+            //echo '<br>';
         }
 
         foreach($groups as $group){
@@ -71,13 +75,16 @@
 
     function printCourse($courseID,$check,$topLevel){
         if($check){
-          echo '<input type="checkbox" name="'.$courseID.'">';
+          echo '<div class="checkbox"><label><input type="checkbox" name="'.$courseID.'">';
         }
         elseif($topLevel==0){
-          echo '<input type="hidden" name="'.$courseID.'">';
+          echo '<div class="checkbox disabled"><label title="This course is required."><input type="checkbox" checked disabled name="'.$courseID.'">';
         }
-        print_r('<a href="http://www.skedgeur.com/?q='.$courseID.'" target="otherTab">'.makeTitle($courseID).'</a>');
+        print_r('<div class="course-name">' . makeTitle($courseID) . '&nbsp;<a href="http://www.skedgeur.com/?q='.$courseID.'" target="otherTab"><span class="glyphicon glyphicon-info-sign"></span></a></div>');
         //print_r($courseID,makeTitle($courseID));
+        if ($check || $topLevel==0) {
+          echo "</label></div>";
+        }
     }
 
     function makeTitle($courseID){
@@ -91,41 +98,58 @@
 
         //Get the group from its name.
         $group = $groupData[$groupName];
+        
+        echo "\n\t\t<div class=\"col-lg-6\"><div class=\"panel panel-primary\">";
 
         //Display title
-        echo "\t\t<h2>".$group['title'].'</h2>';
+        echo "\t\t<div class=\"panel-heading\"><h3 class=\"panel-title\">".$group['title'].'</h3></div>';
 
 
         //Create a div
-        echo "\n\t<div class=\"tabs\">\n";
+        echo "\n\t<div class=\"panel-body\">\n";
 
         //Make the tabs
-        echo "\t\t<ul>";
+        echo "\t\t<ul class=\"nav nav-tabs\" role=\"tablist\">";
         $satisfiers = $group['satisfiers'][0];
 
         for($i=1; $i<count($satisfiers); $i++){
             //Get the group
             $satGroup = $groupData[$satisfiers[$i]];
+            
+            $liAttrs = "";
+            
+            if ($i == 1) {
+              $liAttrs .= " class=\"active\"";
+            }
 
             //Make its tab.
-            echo "\n\t\t\t<li><a href=\"#tab".$i."\">".$satGroup['title']."</a></li>";
+            echo "\n\t\t\t<li$liAttrs><a href=\"#tab-" . makeSafeForCss($groupName) . "-$i\" role=\"tab\" data-toggle=\"tab\">".$satGroup['title']."</a></li>";
         }
         echo "\n\t\t</ul>\n";
+        
+        echo "\n\t\t<div class=\"tab-content\">";
 
         //Populate the tabs
         for($i=1; $i<count($satisfiers); $i++){
             //Get the group
             $satGroup = $satisfiers[$i];
+            
+            $classes = "tab-pane fade";
+            if ($i == 1) {
+              $classes .= " in active";
+            }
 
             //Create the div for it
-            echo "\n\t\t<div id=\"tab".$i."\">\n";
+            echo "\n\t\t<div class=\"$classes\" id=\"tab-" . makeSafeForCss($groupName) . "-$i\">\n";
             populate($satGroup);
             echo "\n\t\t</div>\n";
 
         }
+        
+        echo "\n\t\t</div>";
 
-        //End the div whose id="tabs" 
-        echo "\n\t</div>\n\n";
+        //End the divs
+        echo "\n\t</div></div></div>\n\n";
     }
 
     function getGroup($groupName){
@@ -139,49 +163,53 @@
         //Returns -1 if it's an error.
         return -1;
     }
-
-
-
-?> 
-
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Customize your Schedule</title>
-    <link rel="stylesheet" href="customize.css" type = "text/css">
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script src="customize.js" type="text/javascript"></script>
-    <script>
-     $(function() {
-        $( ".tabs" ).tabs();
-    });
-    </script>
-</head>
-
-<body>
-
-
-
-
-    <h1>Select your courses</h1>
     
+    // converts any string to a valid CSS class name
+    // credit to tsi: http://stackoverflow.com/a/12351201/992504
+    function makeSafeForCss($className) {
+      $cleanName = preg_replace('/\W+/','',strtolower($className));
+      return $cleanName;
+    }
+    
+
+printHeader("Customize your schedule", array("css/customize.css"));
+printNavbar();
+
+?>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>Select your courses</h1>
+  </div>
+  
+  <div class="row">
     <?php 
 
-        foreach($majors as $major){
-            makeTable($major);
-        }
+    foreach($majors as $major){
+        makeTable($major);
+    }
 
 
-        foreach($minors as $minor){
-            makeTable($minor." minor");
-        }
+    foreach($minors as $minor){
+        makeTable($minor." minor");
+    }
 
     ?>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
+      <div class="well">
+          <button id="continueBtn" class="btn btn-primary btn-lg btn-block" type="button">Continue</button>
+      </div>
+    </div>
+  </div>
 
+</div>
 
+<?php
 
-<button onclick="count()">Continue</button>
+printFooter(array("js/jquery-ui-1.10.4.custom.min.js", "js/customize.js"));
 
-</body>
-</html>
+?>

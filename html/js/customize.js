@@ -34,8 +34,16 @@ function count(){
 	    }
 	}
 	//alert(JSON.stringify(courses));
-	window.location.assign("/test.php?courses="+JSON.stringify(courses));
+	window.location.assign("test.php?courses="+JSON.stringify(courses));
 }
+
+//$( ".tabs" ).tabs();
+
+$("#continueBtn").click(function() {
+  count();
+});
+
+$(".disabled-checkbox-container").tooltip();
 
 /*
 $(function(){
