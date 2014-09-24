@@ -1,5 +1,7 @@
 <?php
 
+require_once("common.php");
+
 	class course{
 		var $id;
 
@@ -253,48 +255,42 @@
 		$schedule->semesters = $semesters;
 		return json_encode($schedule);
 	}
+
+printHeader("Schedule", array("css/schedule.css"));
+echo '<script>schedule = ' . generateOutput() . ';</script>';
+printNavbar();
+
 ?>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div id="schedule">
+      </div>
+    </div>
+    
+    <div class="col-md-3">
+      <div id="right">
+        <h2>Prerequisites</h2>
+        
+        <ul id="directions" class="non-bullet">
+          <li>Click on a course to see its prerequisites</li>
+        </ul>
+        
+        <ul id="prereq" class="non-bullet">
+          <li id="course"></li>
+          <li id="concur"></li>
+          <li id="pres"></li>
+          <li id="posts"></li>
+        </ul>
+      </div>
+    </div>
 
-<!DOCTYPE html>
+    <button id="print">Print</button>
+  </div>
+</div>
 
-<html lang="en">
+<?php
 
-	<head>
-		<meta charset="utf-8">
-		<title>UR Planner</title>
-		<link rel="stylesheet" href="style.css" type = "text/css">
-		<script>schedule = <?php echo generateOutput(); ?></script>
-		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-		<script src="schedule.js" type="text/javascript"></script>
-		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-	</head>
+printFooter(array("js/jquery-ui-1.10.4.custom.min.js", "js/schedule.js"));
 
-	<body>
-		
-		
-		
-		<div id="center">
-			<h1>UR Planner</h1>
-			
-			<div id="years">
-			</div>
-		</div>
-		
-		<div id="right">
-			<h2>Prerequisites</h2>
-			
-			<ul id="directions" class="non-bullet">
-				<li>Click on a course to see its prerequisites</li>
-			</ul>
-			
-			<ul id="prereq" class="non-bullet">
-				<li id="course"></li>
-				<li id="concur"></li>
-				<li id="pres"></li>
-				<li id="posts"></li>
-			</ul>
-		</div>
-
-		<button id="print">Print</button>
-	</body>
-</html>
+?>

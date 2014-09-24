@@ -1,4 +1,12 @@
-body {
+.semester {
+  min-height: 20px;
+}
+
+.course {
+  cursor: move;
+}
+
+/*body {
 	font-family: roboto, serif;
 	background-image: url("urbackground3.jpg");
 	background-repeat: no-repeat;
@@ -84,7 +92,7 @@ span.expandable {
 	list-style-type: disc;
 }
 
-/*#directions {
+#directions {
 	display: block;
 }
 
@@ -92,7 +100,7 @@ span.expandable {
 h3	{
 	display: none;
 }
-*/
+
 #course {
 	text-align: center;
 }
@@ -261,4 +269,4 @@ button {
 .credits {
 	font-size: 12pt;
 }
-  
+*/

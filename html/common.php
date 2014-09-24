@@ -10,8 +10,6 @@ $GLOBALS['siteName'] = "UR Planner";
  * extraCss = an array of URLs for additional CSS files this page needs
  */
 function printHeader($pageTitle, $extraCss=array()) {
-    global $SITE_NAME;
-
     ?>
 <!DOCTYPE html>
 <html lang="en">
