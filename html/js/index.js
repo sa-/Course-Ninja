@@ -218,6 +218,20 @@ $("#minorChooserAddBtn").click(function() {
   addMinor($('#minorChooser').val());
 });
 
+$('body').on('keypress', '#majorChooser', function(args) {
+    if (args.keyCode == 13) {
+        $('#majorChooserAddBtn').click();
+        return false;
+    }
+});
+
+$('body').on('keypress', '#minorChooser', function(args) {
+    if (args.keyCode == 13) {
+        $('#minorChooserAddBtn').click();
+        return false;
+    }
+});
+
 $("#continueBtn").click(function() {
   continueToNextPage();
 });
