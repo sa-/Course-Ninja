@@ -154,7 +154,7 @@ function populateCenter() {
     }
     
     
-    html += '<div class="col-md-6 print-change-6">';
+    html += '<div class="col-sm-6 print-change-6">';
 		html += '<div class="panel panel-primary semester-panel sem' + j + '">';
     html += '<div class="panel-heading">' + (j%2==0 ? "Fall" : "Spring") + ' (<span class="credit-total"></span> credits)' + '</div>';
 		html += '<ul class="list-group semester">';
@@ -196,7 +196,7 @@ function populateCenter() {
 		html += '<div class="panel-footer hidden-print add-elective-container">';
     html += '<div class="hidden-add-elective form-inline" style="display:none;">';
     html += '<div class="form-group"><input type="text" placeholder="Course name" class="form-control input-add-elective-name"></div>';
-    html += '<div class="form-group"><input type="number" placeholder="Cr." class="form-control input-add-elective-credits" min="0" step="1" maxlength="2"></div>';
+    html += '<div class="form-group"><input type="number" placeholder="Cr." class="form-control input-add-elective-credits" min="0" max="99" step="1" maxlength="2"></div>';
     html += '<div class="form-group"><button data-toggle="tooltip" title="Add elective" class="btn btn-success btn-add-elective btn-add-elective-submit"><span class="glyphicon glyphicon-plus"></span><span class="visible-xs-inline"> Add</span></button></div>';
     html += '<div class="form-group"><button data-toggle="tooltip" title="Cancel" class="btn btn-warning btn-add-elective btn-add-elective-cancel"><span class="glyphicon glyphicon-remove"></span><span class="visible-xs-inline"> Cancel</span></button></div>';
     html += '</div>';
@@ -247,20 +247,20 @@ function afterPrint() {
  * window methods, so the redundancy is necessary for the print button to 
  * work in other browsers
  */
-var print = function() {
+function myprint() {
   beforePrint();
   window.print();
   afterPrint();
 }
 // this totally shouldn't work but it does
-window.print = print;
+window.print = myprint;
 
 // set listener for print buttons
-$('#btnPrint').click(window.print());
+$('#btnPrint').click(myprint);
 
 //set before/after print listeners (unfortunately only in IE and Firefox)
-window.onbeforeprint = beforePrint();
-window.onafterprint = afterPrint();
+window.onbeforeprint = beforePrint;
+window.onafterprint = afterPrint;
 
 
 
