@@ -5,3 +5,10 @@
 .course {
   cursor: move;
 }
+
+.input-add-elective-name {
+  max-width: 160px;
+}
+.input-add-elective-credits {
+  max-width: 60px;
+}

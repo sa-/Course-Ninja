@@ -257,7 +257,10 @@ require_once("common.php");
 	}
 
 printHeader("Schedule", array("css/schedule.css"));
-echo '<script>schedule = ' . generateOutput() . ';</script>';
+echo '<script>';
+echo 'var schedule = ' . generateOutput() . ';';
+echo 'var howSmallIsSmall = "' . (isset($_GET['print']) ? "xs" : "sm") . '";';
+echo '</script>';
 printNavbar();
 
 ?>
@@ -285,7 +288,7 @@ printNavbar();
       </div>
     </div>
 
-    <button id="print">Print</button>
+    <button class="btn btn-primary" id="btnPrint"><span class="glyphicon glyphicon-print"></span> Print</button>
   </div>
 </div>
 

@@ -24,6 +24,64 @@ $('.semester').sortable({
   }
 }).disableSelection();
 
+
+$('.btn-add-elective-unhide').click(function() {
+  var container = $(this).parents(".add-elective-container");
+  var hiddenBox = container.find(".hidden-add-elective");
+  
+  hiddenBox.show("slide", {
+    direction: "left"
+  });
+  container.find('.btn-add-elective-unhide-container').css("display","none");
+});
+
+$('.btn-add-elective-submit').click(function() {
+  
+  var container = $(this).parents(".add-elective-container");
+  var hiddenBox = container.find(".hidden-add-elective");
+  var nameField = container.find(".input-add-elective-name");
+  var creditsField = container.find(".input-add-elective-credits");
+  
+  var name = nameField.val();
+  var credits = creditsField.val();
+  
+  //TODO make sure both fields were actually filled with valid values
+  
+  var electiveHtml = getElectiveHtml(name,credits);
+  $(this).parents(".semester-panel").find(".semester").append(electiveHtml);
+  
+  container.find('.btn-add-elective-unhide-container').show("slide", {
+    direction: "left"
+  });
+  hiddenBox.css("display","none");
+  
+  nameField.val("");
+  creditsField.val("");
+  
+  updateCredits();
+});
+
+$('.btn-add-elective-cancel').click(function() {
+  
+  var container = $(this).parents(".add-elective-container");
+  var hiddenBox = container.find(".hidden-add-elective");
+  var nameField = container.find(".input-add-elective-name");
+  var creditsField = container.find(".input-add-elective-credits");
+  
+  container.find('.btn-add-elective-unhide-container').show("slide", {
+    direction: "left"
+  });
+  hiddenBox.css("display","none");
+  
+  nameField.val("");
+  creditsField.val("");
+});
+  
+$("body").tooltip({
+  selector: '.btn-add-elective',
+  placement: 'auto top'
+});
+
 /*set_collapse($("img.collapse"));
 set_expand($("img.expand"));
 
@@ -42,6 +100,17 @@ var from = null;
 var dragged = false;*/
 
 
+function getElectiveHtml(name, credits) {
+  //TODO keep a list of electives and assign every elective a unique ID
+  var html = "";
+  html += '<li class="list-group-item course course-elective">';
+  html += name;
+  html += '<span class="badge pull-right course-credits">' + credits + '</span>';
+  html += '</li>';
+  return html;
+}
+
+// updates the credit totals of every semester
 function updateCredits() {
   $(".semester").each(function(index) {
     var semester = $(this);
@@ -85,7 +154,7 @@ function populateCenter() {
     }
     
     
-    html += '<div class="col-xs-6">';
+    html += '<div class="col-md-6 print-change-6">';
 		html += '<div class="panel panel-primary semester-panel sem' + j + '">';
     html += '<div class="panel-heading">' + (j%2==0 ? "Fall" : "Spring") + ' (<span class="credit-total"></span> credits)' + '</div>';
 		html += '<ul class="list-group semester">';
@@ -103,8 +172,9 @@ function populateCenter() {
 			if (course.id != null)
 				html += '" id="' + course.id + '"';
       
-      
-			html += '>' + getCourseDisplayName(course) + '<span class="badge pull-right course-credits">' + course.credits + '</span>';
+      //TODO since the badges don't work on small screens, find some other way to convey credits
+			html += '><span class="badge course-credits">' + course.credits + '</span>';
+      html += getCourseDisplayName(course);
       
       html += '<div class="collapse course-collapse">';
       html += '<p>';
@@ -120,9 +190,19 @@ function populateCenter() {
       html += '<a href="http://www.skedgeur.com/?q=' + course.name + '"  target="_blank" class="btn btn-default btn-xs">skedge <span class="glyphicon glyphicon-new-window"></span></a></p>'
       html += '</div></li>';
 		}
-    
 		html += '</ul>';
-		html += '<div class="panel-footer hidden-print"><button class="btn btn-success addElective"><span class="glyphicon glyphicon-plus"></span> Elective</button></div>';
+    
+    // add electives
+		html += '<div class="panel-footer hidden-print add-elective-container">';
+    html += '<div class="hidden-add-elective form-inline" style="display:none;">';
+    html += '<div class="form-group"><input type="text" placeholder="Course name" class="form-control input-add-elective-name"></div>';
+    html += '<div class="form-group"><input type="number" placeholder="Cr." class="form-control input-add-elective-credits" min="0" step="1" maxlength="2"></div>';
+    html += '<div class="form-group"><button data-toggle="tooltip" title="Add elective" class="btn btn-success btn-add-elective btn-add-elective-submit"><span class="glyphicon glyphicon-plus"></span><span class="visible-xs-inline"> Add</span></button></div>';
+    html += '<div class="form-group"><button data-toggle="tooltip" title="Cancel" class="btn btn-warning btn-add-elective btn-add-elective-cancel"><span class="glyphicon glyphicon-remove"></span><span class="visible-xs-inline"> Cancel</span></button></div>';
+    html += '</div>';
+    html += '<div class="btn-add-elective-unhide-container"><button class="btn btn-success btn-add-elective-unhide"><span class="glyphicon glyphicon-plus"></span> Elective</button></div>';
+    html += '</div>';
+    
 		html += '</div></div>';
 	}
 
@@ -134,6 +214,55 @@ function populateCenter() {
 function getCourseDisplayName(course) {
   return course.name + ': ' + course.title;
 }
+
+
+
+/**
+ * PRINTING EXPLANATION
+ *
+ * Okay so basically, browsers are really stupid and don't have a good 
+ * standard for printing things; as a result, a lot of them end up using 
+ * Bootstrap's XS layout intended for mobile phones when printing, which 
+ * looks awful and uses up a lot of paper.
+ * 
+ * So as a workaround, when the user hits the print button, we change it 
+ * so that elements have the same width on XS that they do in other 
+ * viewports, print the page, and then change the widths back before the 
+ * user sees the XS layout become ridiculously cramped. It ain't pretty 
+ * but it works, goddammit!
+ */
+
+function beforePrint() {
+  $('.print-change-6').addClass('col-xs-6');
+}
+
+function afterPrint() {
+  $('.print-change-6').removeClass('col-xs-6');
+}
+
+/**
+ * Calling beforePrint() and afterPrint() in this function seems like it's 
+ * redundant with setting the window.onbeforeprint and window.onafterprint 
+ * methods, and indeed it is! However, only IE and Firefox support those 
+ * window methods, so the redundancy is necessary for the print button to 
+ * work in other browsers
+ */
+var print = function() {
+  beforePrint();
+  window.print();
+  afterPrint();
+}
+// this totally shouldn't work but it does
+window.print = print;
+
+// set listener for print buttons
+$('#btnPrint').click(window.print());
+
+//set before/after print listeners (unfortunately only in IE and Firefox)
+window.onbeforeprint = beforePrint();
+window.onafterprint = afterPrint();
+
+
 
 /**
 *collapses the review the user clicked on
