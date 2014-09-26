@@ -1,11 +1,34 @@
+/*!
+ * jQuery UI Touch Punch 0.2.3
+ *
+ * Copyright 2011–2014, Dave Furfero
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ *
+ * Depends:
+ *  jquery.ui.widget.js
+ *  jquery.ui.mouse.js
+ */
+!function(a){function f(a,b){if(!(a.originalEvent.touches.length>1)){a.preventDefault();var c=a.originalEvent.changedTouches[0],d=document.createEvent("MouseEvents");d.initMouseEvent(b,!0,!0,window,1,c.screenX,c.screenY,c.clientX,c.clientY,!1,!1,!1,!1,0,null),a.target.dispatchEvent(d)}}if(a.support.touch="ontouchend"in document,a.support.touch){var e,b=a.ui.mouse.prototype,c=b._mouseInit,d=b._mouseDestroy;b._touchStart=function(a){var b=this;!e&&b._mouseCapture(a.originalEvent.changedTouches[0])&&(e=!0,b._touchMoved=!1,f(a,"mouseover"),f(a,"mousemove"),f(a,"mousedown"))},b._touchMove=function(a){e&&(this._touchMoved=!0,f(a,"mousemove"))},b._touchEnd=function(a){e&&(f(a,"mouseup"),f(a,"mouseout"),this._touchMoved||f(a,"click"),e=!1)},b._mouseInit=function(){var b=this;b.element.bind({touchstart:a.proxy(b,"_touchStart"),touchmove:a.proxy(b,"_touchMove"),touchend:a.proxy(b,"_touchEnd")}),c.call(b)},b._mouseDestroy=function(){var b=this;b.element.unbind({touchstart:a.proxy(b,"_touchStart"),touchmove:a.proxy(b,"_touchMove"),touchend:a.proxy(b,"_touchEnd")}),d.call(b)}}}(jQuery);
+
+
+
 //getting fun stuff from javascript.
 populateHTML();
 
-set_collapse($("img.collapse"));
+$('.semester').sortable({
+  connectWith: ".semester",
+  revert: 100,
+  distance: 10,
+  receive: function(event,ui) {
+    updateCredits();
+  }
+}).disableSelection();
+
+/*set_collapse($("img.collapse"));
 set_expand($("img.expand"));
 
 set_sorting($(".semester"));
-select_courses($(".semester>li"));
+select_courses($(".course"));
 
 add_electives($("button.addElective"));
 //	delete_elective($("button.delete"));
@@ -16,13 +39,32 @@ print($("#print"));
 var lastSelected = "";
 var num = 1;
 var from = null;
-var dragged = false;
+var dragged = false;*/
+
+
+function updateCredits() {
+  $(".semester").each(function(index) {
+    var semester = $(this);
+    
+    var panel = semester.parents(".semester-panel");
+    var creditSpan = panel.find(".credit-total");
+    var coursesInSem = semester.children(".course");
+    
+    var creditsInSem = 0;
+    coursesInSem.each(function(index) {
+      var courseCredits = parseInt($(this).find(".course-credits").html());
+      if (!isNaN(courseCredits)) {
+        creditsInSem += courseCredits;
+      }
+    });
+    creditSpan.html(creditsInSem);
+  });
+}
+
 
 function populateHTML() {
 	populateCenter();
 }
-
-
 
 function populateCenter() {
 	var all_courses = schedule.courses;
@@ -41,45 +83,62 @@ function populateCenter() {
       html += '<div class="clearfix"></div>';
       html += '<h2 class="year-title">' + YEAR_NAMES[j/2] + '</h2>';
     }
-	
-		var html2 = "";
-		var credits = 0;
+    
+    
+    html += '<div class="col-xs-6">';
+		html += '<div class="panel panel-primary semester-panel sem' + j + '">';
+    html += '<div class="panel-heading">' + (j%2==0 ? "Fall" : "Spring") + ' (<span class="credit-total"></span> credits)' + '</div>';
+		html += '<ul class="list-group semester">';
+    
+		//var html2 = "";
 		for (var i in sem_courses) {
 			course = all_courses[sem_courses[i]];
-			credits += course.credits;
 
-			html2 += '<li class="list-group-item course';
+			html += '<li class="list-group-item course';
 			if (course.clas != null)
-				html2 += ' ' + course.clas;
+				html += ' ' + course.clas;
 		
-			html2 += '" title="' + course.credits + ' credits"';
+			//html2 += '" title="' + course.credits + ' credits"';
 	
 			if (course.id != null)
-				html2 += ' id="' + course.id + '"';
-			
-			
-			html2 += '>' + course.name + ': ' + course.title + '</li>';
+				html += '" id="' + course.id + '"';
+      
+      
+			html += '>' + getCourseDisplayName(course) + '<span class="badge pull-right course-credits">' + course.credits + '</span>';
+      
+      html += '<div class="collapse course-collapse">';
+      html += '<p>';
+      
+      if (course.pre != null && course.pre.length > 0) {
+        html += 'Prerequisites:<ul>';
+        for (var k = 0; k < course.pre.length; k++) {
+          html += '<li>' + course.pre[k] + '</li>';
+        }
+        html += '</ul><br>';
+      }
+      
+      html += '<a href="http://www.skedgeur.com/?q=' + course.name + '"  target="_blank" class="btn btn-default btn-xs">skedge <span class="glyphicon glyphicon-new-window"></span></a></p>'
+      html += '</div></li>';
 		}
-    html += '<div class="col-xs-6">';
-		html += '<div class="panel panel-default sem' + j + '">';
-    html += '<div class="panel-heading">' + (j%2==0 ? "Fall" : "Spring") + ' (' + credits + ' credits)' + '</div>';
-		html += '<ul class="list-group connectedSortable semester">';
     
-		html += html2 + '</ul>';
-		html += '<div class="panel-footer hidden-print"><button class="btn btn-success addElective">Add an Elective</button></div>';
+		html += '</ul>';
+		html += '<div class="panel-footer hidden-print"><button class="btn btn-success addElective"><span class="glyphicon glyphicon-plus"></span> Elective</button></div>';
 		html += '</div></div>';
 	}
 
 	html += '</div>';
-	//End
-	
-	document.getElementById('schedule').innerHTML = html;
+	$("#schedule").html(html);
+  updateCredits();
+}
+
+function getCourseDisplayName(course) {
+  return course.name + ': ' + course.title;
 }
 
 /**
 *collapses the review the user clicked on
 */
-function set_collapse(UpArrow){
+/*function set_collapse(UpArrow){
 	UpArrow.click(function(){  
 		$(this).parent().children("ul").first().slideUp();
 		
@@ -289,7 +348,10 @@ function select_courses(Li) {
 			var index1 = clas.indexOf(' ');
 			var clas = clas.substring(index1+1);
 			var id = clas.toLowerCase();
-			
+			//console.log(id);
+      
+      //$(this).find("collapse").collapse('toggle');
+      
 			var curr = document.getElementById(id).style.background;
 		
 			if (lastSelected == id) {	// It is already the selected one
@@ -446,5 +508,13 @@ function print(Button) {
 		window.print();
 //		alert("done");
 	});
-}
+}*/
 
+/*$('body').popover({
+  title: "Untitled Course",
+  content: "No data available",
+  placement: "auto top",
+  html: true,
+  selector: ".course:not(.ui-sortable-helper)",
+  trigger: "click"
+});*/

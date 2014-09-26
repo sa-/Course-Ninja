@@ -8,7 +8,7 @@
 	},
 
 	"CSC_prereqs":{
-		"title":"Major Prerequisites",
+		"title":"Prereqs",
 		"satisfiers":[
 			["all", "csc171","csc172","mth150","calc"]
 		]
@@ -16,7 +16,7 @@
 	},
 
 	"CSC_BS_core":{
-		"title":"Core Requirements",
+		"title":"Core Reqs",
 		"satisfiers":[
 			["all", "csc173","csc200","csc242","csc252","csc254","csc280","csc282","mth165"]
 		]
@@ -33,7 +33,7 @@
 	},
 
 	"CSC_BS_advanced":{
-		"title":"Advanced courses",
+		"title":"Advanced",
 		"satisfiers":[
 			["3", "csc255","csc256","csc257","csc258","csc244","csc247","csc248","csc246","csc249","csc281","csc284","csc286","csc287","csc210","csc212"]
 		]
@@ -62,14 +62,14 @@
 	},
 
 	"MTH_prereqs":{
-		"title":"Major Prerequisites",
+		"title":"Prereqs",
 		"satisfiers":[
 			["all","calc","mth164","mth165"]
 		]
 	},
 	
 	"MTH_BS_core":{
-		"title":"Core Requirements",
+		"title":"Core Reqs",
 		"satisfiers":[
 			["all", "mth235","mth236","mth240","mth265","mth282"]
 		]
@@ -77,7 +77,7 @@
 	},
 	
 	"MTH_BS_advanced":{
-		"title":"Advanced courses",
+		"title":"Advanced",
 		"satisfiers":[
 			["6", "ast241","ast242","bme218","bme221","bme230","bme253","bme283","csc250","csc253","csc255","csc256","csc257","csc258","csc260","csc263","csc266","csc281","csc282","csc284","ece210","ece216"]
 		]
@@ -93,7 +93,7 @@
 
 	
 	"GER_core":{
-		"title":"Core Requirements",
+		"title":"Core Reqs",
 		"satisfiers":[
 			["all", "ger150","ger151","ger200","ger202","ger203","clt1","clt2"]
 		]
@@ -101,7 +101,7 @@
 	},
 	
 	"GER_advanced":{
-		"title":"Advanced courses",
+		"title":"Advanced",
 		"satisfiers":[
 			["4", "ger204","ger234","ger235","ger274","ger275","ger294","ger209","ger211","ger215","ger288","ger391"]
 		]
@@ -118,7 +118,7 @@
 
 
 	"CSC_courses":{
-		"title":"Core Requirements",
+		"title":"Core Reqs",
 		"satisfiers":[
 			["6", "csc131","csc132","csc160","csc161","csc170","csc171","csc172","csc173","csc200","csc242","csc252","csc254","csc280","csc282","csc255","csc256","csc257","csc258","csc244","csc247","csc248","csc246","csc249","csc281","csc284","csc286","csc287","csc210","csc212"]
 		]
@@ -134,7 +134,7 @@
 
 	
 	"GER_courses":{
-		"title":"Core Requirements",
+		"title":"Core Reqs",
 		"satisfiers":[
 			["all", "ger150","ger151","ger200","ger202","ger203","clt1","clt2"]
 		]
