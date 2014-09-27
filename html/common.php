@@ -1,6 +1,6 @@
 <?php
 
-$GLOBALS['siteName'] = "UR Planner";
+$GLOBALS['siteName'] = "Course Ninja";
 $GLOBALS['siteDescription'] = "A course planner for University of Rochester students";
 
 
@@ -25,6 +25,7 @@ function printHeader($pageTitle, $extraCss=array()) {
     <title><?php printf("%s &ndash; %s", $GLOBALS['siteName'], $pageTitle); ?></title>
     
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://bootswatch.com/flatly/bootstrap.min.css" rel="stylesheet">
     <?php
     
     for ($i = 0; $i < count($extraCss); $i++) {
@@ -65,7 +66,7 @@ function printJumbotron($subtitle) {
  */
 function printNavbar() {
   ?>
-  <div class="navbar navbar-inverse" role="navigation">
+  <div class="navbar navbar-default" role="navigation">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
