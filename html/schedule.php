@@ -1,5 +1,7 @@
 <?php
 
+require_once("common.php");
+
 	class course{
 		var $id;
 
@@ -253,48 +255,53 @@
 		$schedule->semesters = $semesters;
 		return json_encode($schedule);
 	}
+
+printHeader("Schedule", array("css/schedule.css"));
+echo '<script>';
+echo 'var schedule = ' . generateOutput() . ';';
+echo 'var howSmallIsSmall = "' . (isset($_GET['print']) ? "xs" : "sm") . '";';
+echo '</script>';
+printNavbar();
+
 ?>
+<div class="container">
+  <div class="visible-print-block hide-during-print">
+    <div class="alert alert-warning" role="alert">
+      <strong>Hold on a sec!</strong> This printout will look a lot better if you use the Print button on the page.
+    </div>
+  </div>
+  
+  <div class="row">
+    
+    <div class="col-md-3 col-md-push-9">
+      <div id="right" class="hidden-print">
+        <h2>How to use</h2>
+        
+        <p>Drag courses to re-arrange them as you please. Click or tap on a course to see more information about it.</p>
+        
+        <p>
+          <button class="btn btn-primary" id="btnPrint"><span class="glyphicon glyphicon-print"></span> Print</button>
+        </p>
+        
+        <!--<ul id="prereq" class="non-bullet">
+          <li id="course"></li>
+          <li id="concur"></li>
+          <li id="pres"></li>
+          <li id="posts"></li>
+        </ul>-->
+      </div>
+    </div>
+    
+    <div class="col-md-9 col-md-pull-3">
+      <div id="schedule">
+      </div>
+    </div>
+    
+  </div>
+</div>
 
-<!DOCTYPE html>
+<?php
 
-<html lang="en">
+printFooter(array("js/jquery-ui-1.10.4.custom.min.js", "js/schedule.js"));
 
-	<head>
-		<meta charset="utf-8">
-		<title>UR Planner</title>
-		<link rel="stylesheet" href="style.css" type = "text/css">
-		<script>schedule = <?php echo generateOutput(); ?></script>
-		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-		<script src="schedule.js" type="text/javascript"></script>
-		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-	</head>
-
-	<body>
-		
-		
-		
-		<div id="center">
-			<h1>UR Planner</h1>
-			
-			<div id="years">
-			</div>
-		</div>
-		
-		<div id="right">
-			<h2>Prerequisites</h2>
-			
-			<ul id="directions" class="non-bullet">
-				<li>Click on a course to see its prerequisites</li>
-			</ul>
-			
-			<ul id="prereq" class="non-bullet">
-				<li id="course"></li>
-				<li id="concur"></li>
-				<li id="pres"></li>
-				<li id="posts"></li>
-			</ul>
-		</div>
-
-		<button id="print">Print</button>
-	</body>
-</html>
+?>
