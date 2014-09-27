@@ -299,7 +299,14 @@ function updateCredits() {
         creditsInSem += courseCredits;
       }
     });
-    creditSpan.html(creditsInSem);
+    creditSpan.html(creditsInSem + " credits");
+    if (creditsInSem > 19) {
+      panel.removeClass("panel-primary");
+      panel.addClass("panel-danger");
+    } else {
+      panel.addClass("panel-primary");
+      panel.removeClass("panel-danger");
+    }
   });
 }
 
@@ -332,7 +339,7 @@ function populateCenter() {
     
     html += '<div class="col-sm-6 print-change-6">';
 		html += '<div class="panel panel-primary semester-panel sem' + j + '">';
-    html += '<div class="panel-heading">' + (j%2==0 ? "Fall" : "Spring") + ' (<span class="credit-total"></span> credits)' + '</div>';
+    html += '<div class="panel-heading">' + (j%2==0 ? "Fall" : "Spring") + ' <span class="credit-total text-muted pull-right"></span>' + '</div>';
 		html += '<ul class="list-group semester">';
     
 		//var html2 = "";
