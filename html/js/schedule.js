@@ -158,7 +158,7 @@ $('.course').click(function() {
   }
 });
   
-$(".course").tooltip({
+$(".semesters").tooltip({
   selector: '.course-credits',
   placement: 'auto top',
   container: 'body'
@@ -275,7 +275,7 @@ function getCreditsBadgeHtml(credits) {
 function getElectiveHtml(name, credits) {
   //TODO keep a list of electives and assign every elective a unique ID
   var html = "";
-  html += '<li class="list-group-item course is-movable course-elective">';
+  html += '<li class="list-group-item course course-elective">';
   html += name;
   html += getHandleCourseHtml();
   html += getCreditsBadgeHtml(credits);
