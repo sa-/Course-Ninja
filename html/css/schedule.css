@@ -1,9 +1,22 @@
 .semester {
   min-height: 20px;
 }
-
 .course {
+  cursor: pointer;
+}
+
+.is-movable {
   cursor: move;
+}
+.handle-course {
+  margin-left: 8px;
+  position: relative;
+  min-height: 100%;
+}
+
+.course-collapse-well {
+  margin-bottom: 0;
+  margin-top: 10px;
 }
 
 .input-add-elective-name {
@@ -11,4 +24,17 @@
 }
 .input-add-elective-credits {
   max-width: 60px;
+}
+
+.hide-during-print-active {
+  display: none ! important;
+}
+@media print {
+  .year-container, .semester-panel {
+    page-break-inside: avoid;
+  }
+  
+  #footerContainer {
+    page-break-before: avoid;
+  }
 }

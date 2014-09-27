@@ -1,6 +1,7 @@
 <?php
 
 $GLOBALS['siteName'] = "UR Planner";
+$GLOBALS['siteDescription'] = "A course planner for University of Rochester students";
 
 
 /**
@@ -17,8 +18,7 @@ function printHeader($pageTitle, $extraCss=array()) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Course planner for University of Rochester students">
-    <!--<meta name="author" content="">-->
+    <meta name="description" content="<?php echo $GLOBALS['siteDescription']; ?>">
     <link rel="icon" href="images/favicon.ico">
     <link rel="apple-touch-icon" href="images/appicon.png" />
 
@@ -41,6 +41,8 @@ function printHeader($pageTitle, $extraCss=array()) {
   </head>
 
   <body>
+    <div id="alertNoJS" class="alert alert-danger" role="alert"><strong>Uh oh!</strong> This website doesn't work properly without JavaScript. Please enable JavaScript or switch to a browser that supports JavaScript.</div>
+    <script type="text/javascript">document.getElementById("alertNoJS").style.display = "none";</script>
 <?php
 }
 
@@ -91,7 +93,7 @@ function printNavbar() {
  */
 function printFooter($extraJs=array()) {
     ?>
-    <div class="js-fade-on-reset-home">
+    <div id="footerContainer" class="js-fade-on-reset-home">
       <hr>
       <footer class="text-center">
         Created by some people in 2014

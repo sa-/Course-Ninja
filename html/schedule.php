@@ -265,30 +265,38 @@ printNavbar();
 
 ?>
 <div class="container">
-  <div class="row">
-    <div class="col-md-9">
-      <div id="schedule">
-      </div>
+  <div class="visible-print-block hide-during-print">
+    <div class="alert alert-warning" role="alert">
+      <strong>Hold on a sec!</strong> This printout will look a lot better if you use the Print button on the page.
     </div>
+  </div>
+  
+  <div class="row">
     
-    <div class="col-md-3">
-      <div id="right">
-        <h2>Prerequisites</h2>
+    <div class="col-md-3 col-md-push-9">
+      <div id="right" class="hidden-print">
+        <h2>How to use</h2>
         
-        <ul id="directions" class="non-bullet">
-          <li>Click on a course to see its prerequisites</li>
-        </ul>
+        <p>Drag courses to re-arrange them as you please. Click or tap on a course to see more information about it.</p>
         
-        <ul id="prereq" class="non-bullet">
+        <p>
+          <button class="btn btn-primary" id="btnPrint"><span class="glyphicon glyphicon-print"></span> Print</button>
+        </p>
+        
+        <!--<ul id="prereq" class="non-bullet">
           <li id="course"></li>
           <li id="concur"></li>
           <li id="pres"></li>
           <li id="posts"></li>
-        </ul>
+        </ul>-->
       </div>
     </div>
-
-    <button class="btn btn-primary" id="btnPrint"><span class="glyphicon glyphicon-print"></span> Print</button>
+    
+    <div class="col-md-9 col-md-pull-3">
+      <div id="schedule">
+      </div>
+    </div>
+    
   </div>
 </div>
 
