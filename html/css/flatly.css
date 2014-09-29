@@ -5188,12 +5188,12 @@ a.list-group-item-danger.active:focus {
   border-bottom-color: #ecf0f1;
 }
 .panel-primary {
-  border-color: #2c3e50;
+  border-color: #34495E;
 }
 .panel-primary > .panel-heading {
   color: #ffffff;
   background-color: #34495e;
-  border-color: #2c3e50;
+  border-color: #34495E;
 }
 .panel-primary > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #2c3e50;
