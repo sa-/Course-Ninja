@@ -74,24 +74,6 @@ $(document).ready(function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * OUR CODE
  */
@@ -99,7 +81,7 @@ $(document).ready(function () {
 //getting fun stuff from javascript.
 populateHTML();
 
-
+var schedule;
 
 $('.semester').sortable({
   connectWith: ".semester",
@@ -368,7 +350,9 @@ function populateCenter() {
       if (course.pre != null && course.pre.length > 0) {
         html += 'Prerequisites:<ul>';
         for (var k = 0; k < course.pre.length; k++) {
-          html += '<li>' + course.pre[k] + '</li>';
+          if(schedule.courses[course.pre[k]] != null){ // This null check is a workaround. Not sure what the bug is.
+            html += '<li>' + schedule.courses[course.pre[k]].name + '</li>';
+          }
         }
         html += '</ul><br>';
       }

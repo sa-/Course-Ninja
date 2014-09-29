@@ -277,7 +277,8 @@ printNavbar();
       <div id="right" class="hidden-print">
         <h2>How to use</h2>
         
-        <p>Drag courses to re-arrange them as you please. Click or tap on a course to see more information about it.</p>
+        <p>Drag courses to re-arrange them as you please. </p>
+        <p>Click or tap on a course to see more information about it.</p>
         
         <p>
           <button class="btn btn-primary" id="btnPrint"><span class="glyphicon glyphicon-print"></span> Print</button>
