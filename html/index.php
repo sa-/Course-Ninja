@@ -3,7 +3,7 @@
 require_once("common.php");
 
 printHeader("Home", array("css/flick/jquery-ui-1.10.4.custom.min.css", "css/index.css"));
-printJumbotron('Pick your majors and minors below to <span class="nobr">get started.</span>');
+printJumbotron('Choose your majors and minors below to <span class="nobr">get started.</span>');
 
 ?>
 
@@ -12,7 +12,7 @@ printJumbotron('Pick your majors and minors below to <span class="nobr">get star
   <div class="row">
 
     <div class="col-sm-6">
-      <div class="panel panel-default">
+      <div class="panel panel-primary">
       
         <div class="panel-heading">
           <label for="majorChooser">Majors</label>
@@ -23,7 +23,7 @@ printJumbotron('Pick your majors and minors below to <span class="nobr">get star
             <div class="input-group">
               <input type="text" class="form-control" id="majorChooser">
               <span class="input-group-btn">
-                <button id="majorChooserAddBtn" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+                <button id="majorChooserAddBtn" class="btn btn-primary" type="button"><span class="glyphicon glyphicon-plus"></span></button>
               </span>
             </div><!-- /input-group -->
           </div><!-- /form-group -->
@@ -35,7 +35,7 @@ printJumbotron('Pick your majors and minors below to <span class="nobr">get star
     </div>
 
     <div class="col-sm-6">
-      <div class="panel panel-default">
+      <div class="panel panel-primary">
       
         <div class="panel-heading">
           <label for="minorChooser">Minors</label>
@@ -46,7 +46,7 @@ printJumbotron('Pick your majors and minors below to <span class="nobr">get star
             <div class="input-group">
               <input type="text" class="form-control" id="minorChooser">
               <span class="input-group-btn">
-                <button id="minorChooserAddBtn" class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+                <button id="minorChooserAddBtn" class="btn btn-primary" type="button"><span class="glyphicon glyphicon-plus"></span></button>
               </span>
             </div><!-- /input-group -->
           </div><!-- /form-group -->
@@ -61,7 +61,7 @@ printJumbotron('Pick your majors and minors below to <span class="nobr">get star
   <div class="row">
     <div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
       <div class="well">
-          <button id="continueBtn" class="btn btn-primary btn-lg btn-block" type="button">Continue</button>
+          <button id="continueBtn" class="btn btn-success btn-lg btn-block" type="button" style="background-color:#27ae60;border-color:#27ae60">Continue</button>
           <button id="resetBtn" class="btn btn-default btn-lg btn-block" type="button">Reset</button>
       </div>
     </div>

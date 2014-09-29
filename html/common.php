@@ -24,8 +24,7 @@ function printHeader($pageTitle, $extraCss=array()) {
 
     <title><?php printf("%s &ndash; %s", $GLOBALS['siteName'], $pageTitle); ?></title>
     
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://bootswatch.com/flatly/bootstrap.min.css" rel="stylesheet">
+    <link href="css/flatly.css" rel="stylesheet"> 
     <?php
     
     for ($i = 0; $i < count($extraCss); $i++) {
@@ -54,7 +53,7 @@ function printHeader($pageTitle, $extraCss=array()) {
  */
 function printJumbotron($subtitle) {
   ?>
-  <div class="jumbotron text-center">
+  <div class="jumbotron jumbotron-inverse text-center">
     <h1><?php echo $GLOBALS["siteName"]; ?></h1>
     <p><?php echo $subtitle; ?></p>
   </div>

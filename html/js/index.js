@@ -139,7 +139,7 @@ function buildListItem(classes,name) {
 // name = name of item to be displayed to user
 // onclick = some JS to run when the li is clicked (or null)
 function buildListItem(classes,name,onclick) {
-  var li = "<li class=\"list-group-item list-group-item-info " + classes + "\"><a";
+  var li = "<li class=\"list-group-item list-group-item-primary " + classes + "\"><a style=\"color:#333\"";
   if (onclick != null) {
     li += " onclick=\"" + onclick + "\"";
   }
@@ -175,10 +175,10 @@ function listenRemoveLiBtn() {
   $(".js-remove-li-btn").hover(
     function() {
       ($(this).parents(".list-group-item")).addClass("list-group-item-danger");
-      ($(this).parents(".list-group-item")).removeClass("list-group-item-info");
+      ($(this).parents(".list-group-item")).removeClass("list-group-item-primary");
     }, function() {
       ($(this).parents(".list-group-item")).removeClass("list-group-item-danger");
-      ($(this).parents(".list-group-item")).addClass("list-group-item-info");
+      ($(this).parents(".list-group-item")).addClass("list-group-item-primary");
     }
   );
   $(".js-remove-li-btn").tooltip();
