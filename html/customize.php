@@ -8,7 +8,7 @@ require_once("common.php");
     $groupData = json_decode(file_get_contents("requirements.json"), true);
     $courseData = json_decode(file_get_contents("courseDB.json"), true);
     $requiredCourses = array();
-
+    $tableCount = 0;
 
     function populate($groupName,$topLevel=0){
         global $groupData;
@@ -95,6 +95,13 @@ require_once("common.php");
 
     function makeTable($groupName){
         global $groupData;
+        global $tableCount;
+
+        if($tableCount != 0 && $tableCount % 2 == 0){
+            echo "\t</div>";
+            echo "\t<div class=\"row\">";
+        }
+        $tableCount++;
 
         //Get the group from its name.
         $group = $groupData[$groupName];
@@ -178,6 +185,8 @@ printNavbar();
 ?>
 
 <div class="container">
+
+
 
   <div class="page-header">
     <h1>Select your courses</h1>

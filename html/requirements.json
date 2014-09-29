@@ -35,7 +35,7 @@
 	"CSC_BS_advanced":{
 		"title":"Advanced",
 		"satisfiers":[
-			["3", "csc255","csc256","csc257","csc258","csc244","csc247","csc248","csc246","csc249","csc281","csc284","csc286","csc287","csc210","csc212"]
+			["3", "csc210","csc212","csc244","csc246","csc249","csc255","csc256","csc257","csc258","csc281","csc284","csc286"]
 		]
 		
 	},
