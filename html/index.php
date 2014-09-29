@@ -21,7 +21,7 @@ printJumbotron('Choose your majors and minors below to <span class="nobr">get st
         <div class="panel-body">
           <div class="form-group">
             <div class="input-group">
-              <input type="text" class="form-control" id="majorChooser">
+              <input type="text" class="form-control" id="majorChooser" style="border: 2px solid #aaa;border-right-style:hidden">
               <span class="input-group-btn">
                 <button id="majorChooserAddBtn" class="btn btn-primary" type="button"><span class="glyphicon glyphicon-plus"></span></button>
               </span>
@@ -44,7 +44,7 @@ printJumbotron('Choose your majors and minors below to <span class="nobr">get st
         <div class="panel-body">
           <div class="form-group">
             <div class="input-group">
-              <input type="text" class="form-control" id="minorChooser">
+              <input type="text" class="form-control" id="minorChooser" style="border: 2px solid #aaa;border-right-style:hidden">
               <span class="input-group-btn">
                 <button id="minorChooserAddBtn" class="btn btn-primary" type="button"><span class="glyphicon glyphicon-plus"></span></button>
               </span>
