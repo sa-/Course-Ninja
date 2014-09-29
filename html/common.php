@@ -54,7 +54,7 @@ function printHeader($pageTitle, $extraCss=array()) {
 function printJumbotron($subtitle) {
   ?>
   <div class="jumbotron jumbotron-inverse text-center">
-    <h1><?php echo $GLOBALS["siteName"]; ?></h1>
+    <h1><?php echo $GLOBALS["siteName"]; ?><sub style="font-size:12pt">BETA</sub></h1>
     <p><?php echo $subtitle; ?></p>
   </div>
   <?php

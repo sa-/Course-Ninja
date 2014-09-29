@@ -159,6 +159,44 @@ require_once("common.php");
         echo "\n\t</div></div></div>\n\n";
     }
 
+    function makeManualTable(){
+        global $tableCount;
+
+        if($tableCount != 0 && $tableCount % 2 == 0){
+            echo "\t</div>";
+            echo "\t<div class=\"row\">";
+        }
+        $tableCount++;
+        
+        echo "\n\t\t<div class=\"col-lg-6\"><div class=\"panel panel-primary\">";
+
+        //Display title
+        echo "\t\t<div class=\"panel-heading\"><h3 class=\"panel-title\">Manually add courses</h3></div>";
+
+
+        //Create a div
+        echo "\n\t<div class=\"panel-body\">\n";
+        echo "\n\t\t<h5>Enter course IDs to add them manually</h><br>";
+?>
+        
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" class="form-control" id="manualCourses" style="border: 2px solid #aaa;border-right-style:hidden">
+              <span class="input-group-btn">
+                <button id="manualCoursesAddBtn" class="btn btn-primary" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+              </span>
+            </div><!-- /input-group -->
+          </div><!-- /form-group -->
+
+        <ul id="manualList" class="list-group"></ul>
+<?php
+        
+        echo "\n\t\t</div>";
+
+        //End the divs
+        echo "\n\t</div></div>\n\n";
+    }
+
     function getGroup($groupName){
         global $groupData;
 
@@ -203,6 +241,8 @@ printNavbar();
     foreach($minors as $minor){
         makeTable($minor." minor");
     }
+
+    makeManualTable();
 
     ?>
   </div>
