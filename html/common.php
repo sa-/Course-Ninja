@@ -22,7 +22,7 @@ function printHeader($pageTitle, $extraCss=array()) {
     <link rel="icon" href="images/favicon.ico">
     <link rel="apple-touch-icon" href="images/appicon.png" />
 
-    <title><?php printf("%s &ndash; %s", $GLOBALS['siteName'], $pageTitle); ?></title>
+    <title><?php printf("%s - %s", $GLOBALS['siteName'], $pageTitle); ?></title>
     
     <link href="css/flatly.css" rel="stylesheet"> 
     <?php
@@ -96,7 +96,7 @@ function printFooter($extraJs=array()) {
     <div id="footerContainer" class="js-fade-on-reset-home">
       <hr>
       <footer class="text-center">
-        Created by some people in 2014
+        This tool might be inaccurate and does not serve to replace meetings with your advisor.<br>
       </footer>
     </div>
     
@@ -117,3 +117,16 @@ function printFooter($extraJs=array()) {
 }
 
 ?>
+
+<!-- Google analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-55239322-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+<!-- End Google Analytics -->
