@@ -80,8 +80,8 @@ require_once("common.php");
         elseif($topLevel==0){
           echo '<div class="checkbox disabled"><label title="This course is required."><input type="checkbox" checked disabled name="'.$courseID.'">';
         }
-        print_r('<div class="course-name">' . makeTitle($courseID) . '&nbsp;<a href="http://www.skedgeur.com/?q='.$courseID.'" target="otherTab"><span class="glyphicon glyphicon-info-sign"></span></a></div>');
-        //print_r($courseID,makeTitle($courseID));
+        echo '<div class="course-name">' . makeTitle($courseID) . '&nbsp;<a href="http://www.skedgeur.com/?q='.$courseID.'" target="otherTab"><span class="glyphicon glyphicon-info-sign"></span></a></div>';
+
         if ($check || $topLevel==0) {
           echo "</label></div>";
         }
