@@ -5764,7 +5764,7 @@
         "fall": true,
         "id": "mth281",
         "name": "MTH 281",
-        "pre": ["mth164"],
+        "pre": ["mth164","mth162","mth143"],
         "spring": false,
         "title": "Applied Boundary Value Problems"
     },
@@ -6115,7 +6115,7 @@
         "fall": true,
         "id": "phy142",
         "name": "PHY 142",
-        "pre": [],
+        "pre": ["phy141"],
         "spring": false,
         "title": "Electricity & Magnetism (Honors)"
     },
@@ -6124,7 +6124,7 @@
         "fall": false,
         "id": "phy143",
         "name": "PHY 143",
-        "pre": [],
+        "pre": ["phy141"],
         "spring": true,
         "title": "Waves and Modern Physics (Honors)"
     },
@@ -6169,7 +6169,7 @@
         "fall": true,
         "id": "phy217",
         "name": "PHY 217",
-        "pre": [],
+        "pre": ["phy142","phy122"],
         "spring": false,
         "title": "Electricity & Magnetism I"
     },
@@ -6178,7 +6178,7 @@
         "fall": false,
         "id": "phy218",
         "name": "PHY 218",
-        "pre": [],
+        "pre": ["phy217"],
         "spring": true,
         "title": "Electricity & Magnetism II"
     },
@@ -6187,7 +6187,7 @@
         "fall": false,
         "id": "phy227",
         "name": "PHY 227",
-        "pre": [],
+        "pre": ["phy237","mth281"],
         "spring": true,
         "title": "Thermodynamics & Statistical Mechanics"
     },
@@ -6196,7 +6196,7 @@
         "fall": true,
         "id": "phy235w",
         "name": "PHY 235W",
-        "pre": [],
+        "pre": ["phy121","phy141","mth281"],
         "spring": false,
         "title": "Classical Mechanics I"
     },
@@ -6205,7 +6205,7 @@
         "fall": false,
         "id": "phy237",
         "name": "PHY 237",
-        "pre": [],
+        "pre": ["phy122","phy142","phy123","phy143","mth165"],
         "spring": true,
         "title": "Quantum Mechanics of Physical Systems"
     },
@@ -6214,7 +6214,7 @@
         "fall": true,
         "id": "phy243w",
         "name": "PHY 243W",
-        "pre": [],
+        "pre": ["mth164","phy217","phy237"],
         "spring": false,
         "title": "Advanced Experimental Techniques I"
     },
@@ -6241,7 +6241,7 @@
         "fall": false,
         "id": "phy246",
         "name": "PHY 246",
-        "pre": [],
+        "pre": ["phy237","mth281"],
         "spring": true,
         "title": "Quantum Theory"
     },

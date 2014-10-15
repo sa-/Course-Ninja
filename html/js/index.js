@@ -26,8 +26,7 @@ if (!sessionStorage.minors) {
 //List of majors
 var majList = [
 	"Computer Science B.S.",
-	"Computer Science B.A.",
-	"German",
+	"Physics B.S.",
 	"Mathematics B.S."
 ];
 

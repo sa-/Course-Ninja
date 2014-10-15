@@ -166,5 +166,36 @@
 		"satisfiers":[
 			["2","eco108"]
 		]
+	},
+
+	"Physics B.S.":{
+		"title":"Physics B.S.",
+		"satisfiers":[
+			["all", "PHY_prereqs","PHY_BS_core"]
+		]
+	},
+
+	"PHY_prereqs":{
+		"title":"Prereqs",
+		"satisfiers":[
+			["all", "PHY_intro","calc"]
+		]
+		
+	},
+
+	"PHY_BS_core":{
+		"title":"Core Courses",
+		"satisfiers":[
+			["all", "mth164", "mth165", "phy217", "phy218", "phy227", "phy235w", "phy237", "phy246", "phy243w", "mth281"]
+		]
+		
+	},
+
+	"PHY_intro":{
+		"title":"Introductory Physics",
+		"satisfiers":[
+			["all", "phy121","phy122","phy123"],
+			["all", "phy141","phy142","phy143"]
+		]
 	}
 }

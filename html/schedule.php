@@ -66,8 +66,8 @@ require_once("common.php");
 		$course->credits = $temp['credits'];
 		$course->latest = count($semesters)-1;
 		$course->placed = count($semesters);
-		$course->fall = true;
-		$course->spring = true;
+		$course->fall = $temp['fall'];
+		$course->spring = $temp['spring'];
 		$courses[$temp['id']] = $course;
 
 		//Also build the inputs for the topological sort
@@ -168,6 +168,14 @@ require_once("common.php");
 			if($prereq->placed>=$semesterNumber){
 				return False;
 			}
+		}
+
+		if($semesterNumber % 2 == 0 and $course->fall == False){
+			return False;
+		}
+
+		if($semesterNumber % 2 != 0 and $course->spring == False){
+			return False;
 		}
 
 		return True;
